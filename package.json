@@ -1,7 +1,7 @@
 {
-  "name": "Boggle Challenge Oddball.io",
+  "name": "boggle-react",
   "version": "4.0.0",
-  "description": "Boggle Coding Challeng React JS",
+  "description": "Boggle Coding Challenge React JS",
   "main": "scripts/index.js",
   "scripts": {
     "start": "node server.js",
