@@ -4,8 +4,9 @@
   "description": "Boggle",
   "main": "scripts/index.js",
   "scripts": {
-    "start": "node server.js",
-    "postinstall": "gulp"
+    "start": "node sever.js",
+    "start-dev": "gulp",
+    "build": "export NODE_ENV=development; gulp build"
   },
   "keywords": [
     "react",
