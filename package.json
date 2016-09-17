@@ -4,10 +4,8 @@
   "description": "Boggle",
   "main": "scripts/index.js",
   "scripts": {
-    "prestart": "npm run task",
-    "start": "node server/server.js",
-    "start-dev": "npm run task & npm start",
-    "task": "gulp"
+    "start": "node server.js",
+    "postinstall": "gulp default"
   },
   "keywords": [
     "react",
