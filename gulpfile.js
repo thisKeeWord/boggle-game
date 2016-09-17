@@ -26,7 +26,6 @@ function build(development) {
     entries: ['scripts/index.js'],
     extensions: ['.js'],
     transform: babelify.configure({ presets: ['react', 'es2015'] }),
-    ],
     debug: development,
   };
 
