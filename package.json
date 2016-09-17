@@ -7,8 +7,7 @@
     "prestart": "npm run task",
     "start": "node server/server.js",
     "start-dev": "npm run task & npm start",
-    "task": "gulp",
-    "postinstall": "bower install"
+    "task": "gulp"
   },
   "keywords": [
     "react",
