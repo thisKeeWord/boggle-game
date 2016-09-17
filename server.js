@@ -1,15 +1,60 @@
 /* eslint-disable no-var, strict */
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+// var webpack = require('webpack');
+// var WebpackDevServer = require('webpack-dev-server');
+var express = require('express');
+var app = express();
+var http = require('http');
+var compression = require('compression');
+// var config = require('./webpack.config');
+// var app = new WebpackDevServer(webpack(config), {
+//   publicPath: config.output.publicPath,
+//   hot: true,
+//   historyApiFallback: true
+// });
+var server = http.Server(app);
+var io = require('socket.io')(server);
+var Boggle = require('solve-boggle');
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true
-}).listen(5000, 'localhost', function (err) {
-    if (err) {
-      console.log(err);
-    }
-    console.log('Listening at localhost:5000');
+io.on('connection', socket => {
+  console.log("WTFERROR")
+  socket.on('error', err => {
+    console.error(err);
+    socket.disconnect();
   });
+//   socket.on('start', letters => {
+//     // socket.boggle = new Boggle(letters ? letters : undefined);
+//     socket.boggle = new Boggle(5);
+
+//     io.emit('letters', socket.boggle.board.map(arr => arr.join('')).join(''));
+//     socket.boggle.solve(words => {
+//       io.emit('solution', words);
+//     });
+//   });
+// });
+  socket.on('start', data => {
+    // console.log("CHECK", data)
+    if (socket.room && data.startOtherPlayersGames) {
+      socket.to(socket.room).broadcast.emit('startGame');
+    }
+    socket.boggle = new Boggle(5);
+    socket.emit('letters', socket.boggle.board.map(arr => arr.join('')).join(''));
+    socket.boggle.solve(words => {
+      socket.emit('solution', words);
+    });
+  });
+  socket.on('join', room => {
+    socket.room = room;
+    socket.join(room);
+  });
+});
+
+app.use(compression());
+app.use(express.static(__dirname));
+
+
+server.listen(process.env.PORT || 5000, 'localhost', function (err) {
+	if (err) {
+	  console.log(err);
+	}
+	console.log('Listening at localhost:5000');
+});
