@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var notify = require('gulp-notify');
 var nodemon = require('gulp-nodemon');
+var babelify = require('babelify');
 
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
@@ -24,8 +25,7 @@ function build(development) {
   var props = {
     entries: ['scripts/index.js'],
     extensions: ['.js'],
-    transform: [
-      ['babelify', { presets: ['react', 'es2015'] }]
+    transform: babelify.configure({ presets: ['react', 'es2015'] }),
     ],
     debug: development,
   };
