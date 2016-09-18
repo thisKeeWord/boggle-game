@@ -122,7 +122,7 @@ export default class Selection extends Component {
           { buttons }
         </div>
         <form id="word-form" onSubmit={this.boardHasWord.bind(this)}>
-          <input id="word-input" type="text" name="word" pattern="[a-zA-Z]+" onChange={this.selectWord.bind(this)} />
+          <input id="word-input" type="text" name="word" pattern="[a-zA-Z]+" placeholder="Enter words here" onChange={this.selectWord.bind(this)} />
         </form>
       </div>
     );
