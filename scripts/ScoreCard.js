@@ -1,19 +1,24 @@
 import React, {Component} from 'react';
 
 export default class ScoreCard extends Component {
+  // mouseEnter(word) {
+    // this.props.setSelected(word);
+  // }
+
+  // mouseLeave() {
+  //   this.props.setSelected('');
+  // }
+
   render() {
     // console.log(this.props.finished, "FINSIEHD")
     let foundLabels = [], wordLabels = [];
     this.props.found.map((word, i) => {
-      foundLabels.push(<span className="label label-warning" key={i} onMouseEnter={() => this.props.setSelected(word)}
-                             onMouseLeave={() => this.props.setSelected('')}>{ word }</span>, ' ');
+      foundLabels.push(<span className="label label-warning" key={i} onMouseEnter={() => this.props.setSelected(word)} onMouseLeave={() => this.props.setSelected('')}>{ word }</span>, ' ');
     });
     if (this.props.gameStatus) {
       this.props.stash.map((word, i) => {
         if (!this.props.found.includes(word)) {
-          wordLabels.push(<span className="label label-default" key={i} onMouseEnter={() => this.props.setSelected(word)}
-                                onMouseLeave={() => this.props.setSelected('')}>{ word }</span>, ' ');
-        }
+          wordLabels.push(<span className="label label-default" key={i} onMouseEnter={() => this.props.setSelected(word)} onMouseLeave={() => this.props.setSelected('')}>{ word }</span>, ' ') }
       });
     }
     return (

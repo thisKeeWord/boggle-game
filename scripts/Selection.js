@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
-let $board;
+let board;
 
 export default class Selection extends Component {
   componentDidMount() {
-    $board = $('#board');
+    board = $('#board');
   }
 
   componentWillReceiveProps(props) {
-    console.log(props, props.selected, "PROPSSDF")
-    $board.find('button').removeClass('active');
+    board.find('button').removeClass('active');
     this.pressSelection(props.selected);
   }
 
@@ -57,43 +56,21 @@ export default class Selection extends Component {
     }
 
     function search(y, x, word, path, depth) {
-      console.log($board)
-      let $button = $board.find('[data-row='+ y +'][data-col='+ x + ']');
-      console.log($button, "BUTTON");
-      path = path.concat($button[0]);
-      let nextChar = $button.text();
+      let button = board.find('[data-row='+ y +'][data-col='+ x + ']');
+      path = path.concat(button[0]);
+      let nextChar = button.text();
       word += nextChar;
-      if (depth === target.length - 1) {
-        return word === target ? that.highlight(path) : false;
-      }
-      if (nextChar !== target[depth]) {
-        return false;
-      }
+      if (depth === target.length - 1) { return word === target ? that.highlight(path) : false }
+      if (nextChar !== target[depth]) { return false }
       visited[y][x] = true;
-      if (has(y - 1, x - 1) && !visited[y - 1][x - 1]) {
-        search(y - 1, x - 1, word, path, depth + 1);
-      }
-      if (has(y - 1, x) && !visited[y - 1][x]) {
-        search(y - 1, x, word, path, depth + 1);
-      }
-      if (has(y - 1, x + 1) && !visited[y - 1][x + 1]) {
-        search(y - 1, x + 1, word, path, depth + 1);
-      }
-      if (has(y, x - 1) && !visited[y][x - 1]) {
-        search(y, x - 1, word, path, depth + 1);
-      }
-      if (has(y, x + 1) && !visited[y][x + 1]) {
-        search(y, x + 1, word, path, depth + 1);
-      }
-      if (has(y + 1, x - 1) && !visited[y + 1][x - 1]) {
-        search(y + 1, x - 1, word, path, depth + 1);
-      }
-      if (has(y + 1, x) && !visited[y + 1][x]) {
-        search(y + 1, x, word, path, depth + 1);
-      }
-      if (has(y + 1, x + 1) && !visited[y + 1][x + 1]) {
-        search(y + 1, x + 1, word, path, depth + 1);
-      }
+      if (has(y - 1, x - 1) && !visited[y - 1][x - 1]) { search(y - 1, x - 1, word, path, depth + 1) }
+      if (has(y - 1, x) && !visited[y - 1][x]) { search(y - 1, x, word, path, depth + 1) }
+      if (has(y - 1, x + 1) && !visited[y - 1][x + 1]) { search(y - 1, x + 1, word, path, depth + 1) }
+      if (has(y, x - 1) && !visited[y][x - 1]) { search(y, x - 1, word, path, depth + 1) }
+      if (has(y, x + 1) && !visited[y][x + 1]) { search(y, x + 1, word, path, depth + 1) }
+      if (has(y + 1, x - 1) && !visited[y + 1][x - 1]) { search(y + 1, x - 1, word, path, depth + 1) }
+      if (has(y + 1, x) && !visited[y + 1][x]) { search(y + 1, x, word, path, depth + 1) }
+      if (has(y + 1, x + 1) && !visited[y + 1][x + 1]) { search(y + 1, x + 1, word, path, depth + 1) }
       visited[y][x] = false;
     }
 
@@ -109,12 +86,7 @@ export default class Selection extends Component {
   render() {
     let buttons = [];
     for (let i = 0; i < 25; i++) {
-      buttons.push(
-        <button className="btn btn3d btn-white letter" key={i}
-                data-row={Math.floor(i / 5)} data-col={i % 5} onClick={this.pushLetter}>
-          {this.props.letters[i]}
-        </button>
-      );
+      buttons.push(<button className="btn btn3d btn-white letter" key={i} data-row={Math.floor(i / 5)} data-col={i % 5} onClick={this.pushLetter}>{this.props.letters[i]}</button>);
     }
     return (
       <div>

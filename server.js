@@ -16,7 +16,7 @@ var io = require('socket.io')(server);
 var Boggle = require('solve-boggle');
 
 io.on('connection', socket => {
-  console.log("WTFERROR")
+  // console.log("WTFERROR")
   socket.on('error', err => {
     console.error(err);
     socket.disconnect();

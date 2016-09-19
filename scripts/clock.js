@@ -1,30 +1,32 @@
 import React, {Component} from 'react';
-let pid, prevTick;
+let idle, prevTick;
 
 export default class Clock extends Component {
   constructor() {
     super();
     this.state = {
-      remaining: 240000
+      timeLeft: 240000
     };
   }
 
   componentDidUpdate() {
-    if (!this.props.start || pid) return;
-    if (this.props.gameStatus) { this.setState({ remaining: 240000 }); }
-    if (this.state.remaining <= 0) {
+    if (!this.props.start || idle) return;
+    if (this.props.gameStatus) { this.setState({ timeLeft: 240000 }); }
+    if (this.state.timeLeft <= 0) {
       this.props.gameOver(true);
-      return pid = null;
+      return idle = null;
     }
     // this is a weird looking timeout right? shouldn't it just be 1000ms? If you set it to 1000 then it will be around 1002 to 1006 because it has to wait for the event loop.
     // I'm correcting for this by measuring how long it was since the previous tick, so if it took 1006ms the previous time, wait only 994ms this time.
-    let timeout;
+    let timeout = 0;;
     let timeDiff = Date.now() - prevTick;
     timeDiff > 1000 ? timeout = 2000 - timeDiff : timeout = 1000;
     prevTick = Date.now();
-    pid = setTimeout(() => {
-      pid = null;
-      this.setState({ remaining: this.state.remaining - 1000 });
+    idle = setTimeout(() => {
+      idle = null;
+      this.setState({ 
+        timeLeft: this.state.timeLeft - 1000 
+      });
     }, timeout);
   }
 
@@ -41,7 +43,7 @@ export default class Clock extends Component {
   render() {
     return (
       <div className="clock">
-        {this.convertTime(this.state.remaining)}
+        {this.convertTime(this.state.timeLeft)}
       </div>
     )
   }
