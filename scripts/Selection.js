@@ -84,18 +84,23 @@ export default class Selection extends Component {
   }
 
   render() {
-    let buttons = [];
+    let buttons = [], inputForm = (<div />);
     for (let i = 0; i < 25; i++) {
       buttons.push(<button className="btn btn3d btn-white letter" key={i} data-row={Math.floor(i / 5)} data-col={i % 5} onClick={this.pushLetter}>{this.props.letters[i]}</button>);
+    }
+    if (!this.props.gameStatus) {
+      inputForm = (
+        <form id="word-form" onSubmit={this.boardHasWord.bind(this)} className="animated slideInLeft">
+          <input id="word-input" type="text" name="word" pattern="[a-zA-Z]+" placeholder="Enter words here" onChange={this.selectWord.bind(this)} />
+        </form>
+      );
     }
     return (
       <div>
         <div id="board">
           { buttons }
         </div>
-        <form id="word-form" onSubmit={this.boardHasWord.bind(this)}>
-          <input id="word-input" type="text" name="word" pattern="[a-zA-Z]+" placeholder="Enter words here" onChange={this.selectWord.bind(this)} />
-        </form>
+          { inputForm }
       </div>
     );
   }
