@@ -91,7 +91,7 @@ export default class Selection extends Component {
     if (!this.props.gameStatus) {
       inputForm = (
         <form id="word-form" onSubmit={this.boardHasWord.bind(this)} className="animated slideInLeft">
-          <input id="word-input" type="text" name="word" pattern="[a-zA-Z]+" placeholder="Enter words here" onChange={this.selectWord.bind(this)} />
+          <input id="word-input" type="text" name="word" pattern="[a-zA-Z]+" placeholder="Enter words here" onChange={this.selectWord.bind(this)} autoFocus />
         </form>
       );
     }
