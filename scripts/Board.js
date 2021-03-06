@@ -20,7 +20,7 @@ export default class Board extends Component {
       found: Immutable.Set(),
       start: null,
       gameStatus: true,
-    };
+    }
   }
 
   componentWillMount() {
