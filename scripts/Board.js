@@ -1,5 +1,5 @@
 window.jQuery = window.$ = require('jquery');
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import io from 'socket.io-client';
 import qs from 'querystring';
 import Immutable from 'immutable';
@@ -24,7 +24,10 @@ export default class Board extends Component {
   }
 
   componentWillMount() {
-    socket.on('letters', letters => this.setState({ letters: letters }));
+    socket.on('letters', letters => {
+      this.setState({ letters: letters })
+    });
+
     socket.on('solution', stash => this.setState({ stash: Immutable.Set(stash) }));
     if (query.board) {
       socket.emit('join', query.board);
@@ -58,7 +61,7 @@ export default class Board extends Component {
   }
 
   gameOver(gameStatus) {
-    this.setState({ 
+    this.setState({
       gameStatus: gameStatus
     });
   }

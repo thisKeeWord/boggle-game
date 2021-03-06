@@ -12,14 +12,14 @@ var sourcemaps = require('gulp-sourcemaps');
 var rename = require('gulp-rename');
 var autoprefixer = require('gulp-autoprefixer');
 
-gulp.task('default', ['scripts:dev', 'sass:dev', 'sass:watch', 'serve']);
-gulp.task('build', ['scripts', 'sass']);
-gulp.task('scripts', () => build(false));
-gulp.task('scripts:dev', () => build(true));
+gulp.task('scripts', async () => build(false));
+gulp.task('scripts:dev', async () => build(true));
 gulp.task('sass', sass);
 gulp.task('sass:dev', sassDev);
 gulp.task('sass:watch', sassWatch);
 gulp.task('serve', serve);
+gulp.task('build', gulp.series('scripts', 'sass'));
+gulp.task('default', gulp.series('scripts:dev', 'sass:dev', 'sass:watch', 'serve'));
 
 function build(development) {
   var props = {
@@ -66,8 +66,8 @@ function handleErrors() {
 }
 
 
-function sass() {
-  gulp.src('src/sass/main.scss')
+async function sass() {
+  gulp.src('styles/styles.css')
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: ['> 5%'],
@@ -77,8 +77,8 @@ function sass() {
     .pipe(gulp.dest('public/build/'));
 }
 
-function sassDev() {
-  gulp.src('src/sass/main.scss')
+async function sassDev() {
+  gulp.src('styles/styles.css')
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
@@ -90,8 +90,8 @@ function sassDev() {
     .pipe(gulp.dest('./'));
 }
 
-function sassWatch() {
-  gulp.watch('src/sass/*.scss', ['sass:dev']);
+async function sassWatch() {
+  gulp.watch('styles/*.css', gulp.series('sass:dev'));
 }
 
 function serve() {
