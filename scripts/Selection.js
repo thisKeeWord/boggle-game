@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import $ from 'jquery';
 let board;
 
@@ -32,11 +32,9 @@ export default class Selection extends Component {
     let that = this;
     let char = e.target.innerText;
     let input = document.getElementById('word-input');
-    // console.log(input, "INPUT")
     input.value += char;
     let event = new Event('input', { bubbles: true });
     input.dispatchEvent(event);
-    // console.log(input, "OUTPUT")
   }
 
   pressSelection(target) {
@@ -56,7 +54,7 @@ export default class Selection extends Component {
     }
 
     function search(y, x, word, path, depth) {
-      let button = board.find('[data-row='+ y +'][data-col='+ x + ']');
+      let button = board.find('[data-row=' + y + '][data-col=' + x + ']');
       path = path.concat(button[0]);
       let nextChar = button.text();
       word += nextChar;
@@ -98,9 +96,9 @@ export default class Selection extends Component {
     return (
       <div>
         <div id="board">
-          { buttons }
+          {buttons}
         </div>
-          { inputForm }
+        { inputForm}
       </div>
     );
   }
