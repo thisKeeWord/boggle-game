@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 
 export default class ScoreCard extends Component {
-  // mouseEnter(word) {
-  // this.props.setSelected(word);
-  // }
-
-  // mouseLeave() {
-  //   this.props.setSelected('');
-  // }
-
   render() {
     let foundLabels = [], wordLabels = [];
     this.props.found.map((word, i) => {
