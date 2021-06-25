@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ScoreCard from './ScoreCard';
 import Immutable from 'immutable';
 const is = Immutable.is;
@@ -10,7 +10,7 @@ export default class Score extends Component {
   constructor() {
     super();
     this.state = {
-      points: { 
+      points: {
         '3': 1,
         '4': 1,
         '5': 2,
@@ -28,17 +28,17 @@ export default class Score extends Component {
 
   render() {
     let foundGroups = _.groupBy([...this.props.found], word => Math.min(word.length, 10)),
-        wordGroups = _.groupBy([...this.props.stash], word => Math.min(word.length, 10)),
-        scoreCards = [],
-        score = 0;
+      wordGroups = _.groupBy([...this.props.stash], word => Math.min(word.length, 10)),
+      scoreCards = [],
+      score = 0;
     for (let key in wordGroups) {
       if (foundGroups[key]) { score += this.state.points[key] * foundGroups[key].length; }
       scoreCards.push(<ScoreCard len={key} key={key} found={foundGroups[key] || []} stash={wordGroups[key]} gameStatus={this.props.gameStatus} setSelected={this.props.setSelected} />);
     }
     return (
-      <div>
-        <h1>Score: { score }</h1>
-        { scoreCards }
+      <div className="score">
+        <h1>Score: {score}</h1>
+        { scoreCards}
       </div>
     )
   }
