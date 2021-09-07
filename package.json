@@ -22,6 +22,7 @@
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
     "express": "^4.14.0",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-nodemon": "^2.4.2",
     "gulp-notify": "^2.2.0",
@@ -37,9 +38,8 @@
     "socket.io": "^3.1.2",
     "socket.io-client": "^3.1.2",
     "solve-boggle": "^3.0.1",
-    "vinyl-source-stream": "^2.0.0",
-    "gulp": "^4.0.2",
     "uglifyify": "^5.0.2",
+    "vinyl-source-stream": "^2.0.0",
     "watchify": "^4.0.0"
   }
 }

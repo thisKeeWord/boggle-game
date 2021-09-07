@@ -1,17 +1,19 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 let idle, prevTick;
+
+const totalTime = 420000
 
 export default class Clock extends Component {
   constructor() {
     super();
     this.state = {
-      timeLeft: 240000
+      timeLeft: totalTime
     };
   }
 
   componentDidUpdate() {
     if (!this.props.start || idle) return;
-    if (this.props.gameStatus) { this.setState({ timeLeft: 240000 }); }
+    if (this.props.gameStatus) { this.setState({ timeLeft: totalTime }); }
     if (this.state.timeLeft <= 0) {
       this.props.gameOver(true);
       return idle = null;
@@ -24,8 +26,8 @@ export default class Clock extends Component {
     prevTick = Date.now();
     idle = setTimeout(() => {
       idle = null;
-      this.setState({ 
-        timeLeft: this.state.timeLeft - 1000 
+      this.setState({
+        timeLeft: this.state.timeLeft - 1000
       });
     }, timeout);
   }
