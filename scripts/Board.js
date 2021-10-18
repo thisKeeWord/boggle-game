@@ -1,13 +1,12 @@
 window.jQuery = window.$ = require('jquery');
 import React, { Component } from 'react';
 import io from 'socket.io-client';
-import qs from 'querystring';
 import Immutable from 'immutable';
 import Controls from './Controls';
 import Selection from './Selection';
 import Score from './Score';
 const socket = io();
-window.query = qs.parse(location.search.slice(1));
+window.query = new URLSearchParams(location.search.slice(1));
 if (query.board && query.board.length !== 25) delete query.board;
 
 export default class Board extends Component {
