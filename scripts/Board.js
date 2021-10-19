@@ -31,7 +31,6 @@ export default class Board extends Component {
 
   componentWillMount() {
     socket.on('letters', letters => {
-      console.log('yo')
       this.setState({ letters: letters })
     });
 
