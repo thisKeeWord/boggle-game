@@ -35,7 +35,7 @@ io.on('connection', socket => {
       socket.to(socket.room).broadcast.emit('startGame');
     }
     socket.boggle = new Boggle(5);
-    socket.emit('letters', socket.boggle.board.map(arr => arr.join('')).join(''));
+    socket.emit('letters', socket.boggle.board.flat());
     socket.boggle.solve(words => {
       socket.emit('solution', words);
     });

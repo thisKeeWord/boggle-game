@@ -38,7 +38,7 @@ export default class Score extends Component {
     return (
       <div className="score">
         <h1>Score: {score}</h1>
-        { scoreCards}
+        {scoreCards}
       </div>
     )
   }
