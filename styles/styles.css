@@ -214,10 +214,12 @@ body {
 
 .btn3d.btn-white.letter {
   color: #1f4288;
-  font-size: 40px;
+  font-size: 30px;
   width: 65px;
   height: 65px;
-  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn3d.btn-white.letter:active,
