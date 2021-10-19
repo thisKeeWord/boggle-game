@@ -6,14 +6,14 @@ import Controls from './Controls';
 import Selection from './Selection';
 import Score from './Score';
 const socket = io();
-window.query = new URLSearchParams(location.search.slice(1));
-if (query.board && query.board.length !== 25) delete query.board;
+const queryBoard = location.search.slice(7);
 
 const dice = [
-  'AAEEGN', 'ABBJOO', 'ACHOPS', 'AFFKPS',
-  'AOOTTW', 'CIMOTU', 'DEILRX', 'DELRVY',
-  'DISTTY', 'EEGHNW', 'EEINSU', 'EHRTVW',
-  'EIOSST', 'ELRTTY', 'HIMNUQ', 'HLNNRZ',
+  'AAEEGN', 'ABBJOO', 'ACHOPS', 'AFFKPS', 'ANCDEF',
+  'AOOTTW', 'CIMOTW', 'DEILRX', 'DELRVQ', 'DFGHIJ',
+  'DISTTY', 'EEGHNW', 'EEINSU', 'EHRTVW', 'EIABYQ',
+  'EIOSST', 'ELRTTY', 'HIMNUQ', 'HLNNRZ', 'HMNOPX',
+  'LAPRAS', 'XYABCR', 'QQZZZZ', 'QQYWXV', 'MARRIE',
 ];
 
 export default class Board extends Component {
@@ -35,8 +35,8 @@ export default class Board extends Component {
     });
 
     socket.on('solution', stash => this.setState({ stash: Immutable.Set(stash) }));
-    if (query.board) {
-      socket.emit('join', query.board);
+    if (queryBoard) {
+      socket.emit('join', queryBoard);
       socket.on('startGame', () => this.startGame(false));
     }
   }
@@ -62,7 +62,7 @@ export default class Board extends Component {
       return die[stringIndex];
     }
     var letters = '';
-    for (var i = 0; i < 16; i++) {
+    for (var i = 0; i < 25; i++) {
       letters += roll(dice);
     }
     location.replace('/?board=' + letters);
@@ -70,7 +70,7 @@ export default class Board extends Component {
 
   startGame(startOtherPlayersGames) {
     socket.emit('start', {
-      letters: query.board,
+      letters: queryBoard,
       startOtherPlayersGames
     });
     this.setState({

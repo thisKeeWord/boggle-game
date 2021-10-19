@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 export default class ScoreCard extends Component {
   render() {
-    console.log(this.props.stash)
     let foundLabels = [], wordLabels = [];
     this.props.found.map((word, i) => {
       foundLabels.push(<span className="label label-warning" key={i} onMouseEnter={() => this.props.setSelected(word)} onMouseLeave={() => this.props.setSelected('')}>{word}</span>, ' ');
