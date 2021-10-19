@@ -20,21 +20,11 @@ io.on('connection', socket => {
     console.error(err);
     socket.disconnect();
   });
-  //   socket.on('start', letters => {
-  //     // socket.boggle = new Boggle(letters ? letters : undefined);
-  //     socket.boggle = new Boggle(5);
-
-  //     io.emit('letters', socket.boggle.board.map(arr => arr.join('')).join(''));
-  //     socket.boggle.solve(words => {
-  //       io.emit('solution', words);
-  //     });
-  //   });
-  // });
   socket.on('start', data => {
     if (socket.room && data.startOtherPlayersGames) {
       socket.to(socket.room).broadcast.emit('startGame');
     }
-    socket.boggle = new Boggle(5);
+    socket.boggle = new Boggle(data.letters ? data.letters : 5);
     socket.emit('letters', socket.boggle.board.flat());
     socket.boggle.solve(words => {
       socket.emit('solution', words);
