@@ -6,7 +6,7 @@ module.exports = {
   watch: true,
   entry: [
     // entry point of our app
-    'react-hot-loader/patch', './client/index.tsx',
+    'react-hot-loader/patch', './scripts/index.js',
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),

@@ -22,8 +22,6 @@
     "typeRoots": ["node_modules/@types", "./types"],
   },
   "include": [
-    "api",
-    "client",
     "server",
     "scripts",
     "**/*.ts", 

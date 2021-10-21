@@ -6,7 +6,7 @@ declare global {
 }
 
 window.jQuery = window.$ = require('jquery');
-import React, { Component } from 'react';
+import React, {  FunctionComponent, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import Immutable from 'immutable';
 import Controls from './Controls';
@@ -23,90 +23,85 @@ const dice = [
   'LAPRAS', 'XYABCR', 'QQZZZZ', 'QQYWXV', 'MARRIE',
 ];
 
-export default class Board extends Component {
-  constructor() {
-    super();
-    this.state = {
-      letters: [],
-      selected: '',
-      stash: Immutable.Set(),
-      found: Immutable.Set(),
-      start: null,
-      gameStatus: true,
-    };
-  }
-  
-//https://stackoverflow.com/questions/62091146/componentwillmount-for-react-functional-component
-  componentWillMount() {
-    socket.on('letters', letters => {
-      this.setState({ letters: letters })
+const Board: FunctionComponent = () => {
+  const [letters, setLetters] = useState<string[]>([])
+  const [selected, setSelected] = useState<string>('')
+  const [stash, setStash] = useState(Immutable.Set())
+  const [found, setFound] = useState(Immutable.Set())
+  const [start, setStart] = useState<number>()
+  const [gameStatus, setGameStatus] = useState<boolean>(true)
+  const [mounted, setMounted] = useState<boolean>(false)
+
+  if (!mounted) {
+    socket.on('letters', (letters) => {
+      setLetters(letters)
     });
 
-    socket.on('solution', stash => this.setState({ stash: Immutable.Set(stash) }));
+    socket.on('solution', (stash) => {
+      setStash(Immutable.Set(stash));
+    })
+
     if (queryBoard) {
       socket.emit('join', queryBoard);
-      socket.on('startGame', () => this.startGame(false));
+      socket.on('startGame', () => {
+        startGame(false);
+      })
     }
   }
 
-  setSelected(selected) {
-    this.setState({
-      selected: selected
-    });
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const pushFound = (newWord): void =>{
+    const newFound = found.add(newWord);
+    setFound(newFound)
   }
 
-  pushFound(newWord) {
-    var newFound = this.state.found.add(newWord);
-    this.setState({
-      found: newFound
-    });
-  }
-
-  startMultiplayer() {
-    function roll(dice) {
+  const startMultiplayer = (): void => {
+    const roll = (dice): string =>{
       let diceIndex = Math.floor(Math.random() * dice.length);
       let die = dice.splice(diceIndex, 1)[0];
       let stringIndex = Math.floor(Math.random() * die.length);
+
       return die[stringIndex];
     }
-    var letters = '';
-    for (var i = 0; i < 25; i++) {
-      letters += roll(dice);
+
+    let lettersStore = '';
+    for (let i = 0; i < 25; i++) {
+      lettersStore += roll(dice);
     }
-    location.replace('/?board=' + letters);
+
+    location.replace('/?board=' + lettersStore);
   }
 
-  startGame(startOtherPlayersGames) {
+  const startGame = (startOtherPlayersGames): void => {
     socket.emit('start', {
       letters: queryBoard,
       startOtherPlayersGames
     });
-    this.setState({
-      start: Date.now(),
-      found: Immutable.Set(),
-      gameStatus: false
-    });
+
+    setStart(Date.now()),
+    setFound(Immutable.Set())
+    setGameStatus(false)
   }
 
-  gameOver(gameStatus) {
-    this.setState({
-      gameStatus: gameStatus
-    });
+  const gameOver = (gameStatus: boolean): void => {
+    setGameStatus(gameStatus)
   }
 
-  render() {
-    return (
-      <div className="row">
-        <div className="col-md-6 col-sm-7">
-          <Controls letters={this.state.letters} selected={this.state.selected} stash={this.state.stash} found={this.state.found} start={this.state.start} gameStatus={this.state.gameStatus} startGame={this.startGame.bind(this)} gameOver={this.gameOver.bind(this)} />
-          <button onClick={this.startMultiplayer} className="btn btn-sm btn-primary btn3d">Multiplayer</button>
-          <Selection setSelected={this.setSelected.bind(this)} letters={this.state.letters} selected={this.state.selected} stash={this.state.stash} found={this.state.found} start={this.state.start} gameStatus={this.state.gameStatus} setSelected={this.setSelected.bind(this)} pushFound={this.pushFound.bind(this)} />
-        </div>
-        <div className="col-md-6 col-sm-5">
-          <Score letters={this.state.letters} selected={this.state.selected} stash={this.state.stash} found={this.state.found} start={this.state.start} gameStatus={this.state.gameStatus} setSelected={this.setSelected.bind(this)} />
-        </div>
+  return (
+    <div className="row">
+      <div className="col-md-6 col-sm-7">
+        <Controls letters={letters} selected={selected} stash={stash} found={found} start={start} gameStatus={gameStatus} startGame={startGame} gameOver={gameOver} />
+        <button onClick={startMultiplayer} className="btn btn-sm btn-primary btn3d">Multiplayer</button>
+        <Selection setSelected={setSelected} letters={letters} selected={selected} stash={stash} found={found} start={start} gameStatus={gameStatus} pushFound={pushFound} />
       </div>
-    )
-  }
+      <div className="col-md-6 col-sm-5">
+        <Score letters={letters} selected={selected} stash={stash} found={found} start={start} gameStatus={gameStatus} setSelected={setSelected} />
+      </div>
+    </div>
+  )
 }
 
+export default Board
