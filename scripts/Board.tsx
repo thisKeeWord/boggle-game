@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { io } from 'socket.io-client'
-import Immutable from 'immutable'
 import Controls from './Controls'
 import Selection from './Selection'
 import Score from './Score'
@@ -31,8 +30,8 @@ const dice = [
 const Board: FunctionComponent = () => {
   const [letters, setLetters] = useState<string[]>([])
   const [selected, setSelected] = useState<string>('')
-  const [stash, setStash] = useState(Immutable.Set(''))
-  const [found, setFound] = useState(Immutable.Set(''))
+  const [stash, setStash] = useState<Set<any>>(new Set())
+  const [found, setFound] = useState<Set<any>>(new Set())
   const [start, setStart] = useState<number>(0)
   const [gameStatus, setGameStatus] = useState<boolean>(true)
   const [mounted, setMounted] = useState<boolean>(false)
@@ -43,7 +42,7 @@ const Board: FunctionComponent = () => {
     })
 
     socket.on('solution', (stashe) => {
-      setStash(Immutable.Set(stashe))
+      setStash(new Set(stashe))
     })
 
     if (queryBoard) {
@@ -88,7 +87,7 @@ const Board: FunctionComponent = () => {
     })
 
     setStart(Date.now())
-    setFound(Immutable.Set())
+    setFound(new Set())
     setGameStatus(false)
   }
 
@@ -113,15 +112,7 @@ const Board: FunctionComponent = () => {
         />
       </div>
       <div className="col-md-6 col-sm-5">
-        <Score
-          letters={letters}
-          selected={selected}
-          stash={stash}
-          found={found}
-          start={start}
-          gameStatus={gameStatus}
-          setSelected={setSelected}
-        />
+        <Score stash={stash} found={found} gameStatus={gameStatus} />
       </div>
     </div>
   )

@@ -16,8 +16,8 @@ const points = {
 }
 
 interface ScoreProps {
-  stash: any[]
-  found: any[]
+  stash: Set<any>
+  found: Set<any>
   gameStatus: boolean
 }
 
