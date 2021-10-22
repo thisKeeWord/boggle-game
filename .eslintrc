@@ -31,6 +31,7 @@
     "react/destructuring-assignment": 0,
     "eqeqeq": 0,
     "no-plusplus": 0,
+    "semi": "off",
     "max-len": [1, 140],
     "react/no-unused-prop-types": "warn",
     "import/extensions": [

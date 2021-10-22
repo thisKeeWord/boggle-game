@@ -1,19 +1,24 @@
+import React, { FunctionComponent, useEffect, useState } from 'react'
+import { io } from 'socket.io-client'
+import Immutable from 'immutable'
+import Controls from './Controls'
+import Selection from './Selection'
+import Score from './Score'
+
 declare global {
-  interface Window { 
-    jQuery: any; 
-    $: any;
+  // eslint-disable-next-line no-unused-vars
+  interface Window {
+    jQuery: any
+    $: any
   }
 }
 
-window.jQuery = window.$ = require('jquery');
-import React, {  FunctionComponent, useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
-import Immutable from 'immutable';
-import Controls from './Controls';
-import Selection from './Selection';
-import Score from './Score';
-const socket = io();
-const queryBoard = location.search.slice(7);
+// eslint-disable-next-line no-multi-assign
+window.jQuery = window.$ = require('jquery')
+
+const socket = io()
+// eslint-disable-next-line no-restricted-globals
+const queryBoard = location.search.slice(7)
 
 const dice = [
   'AAEEGN', 'ABBJOO', 'ACHOPS', 'AFFKPS', 'ANCDEF',
@@ -21,30 +26,30 @@ const dice = [
   'DISTTY', 'EEGHNW', 'EEINSU', 'EHRTVW', 'EIABYQ',
   'EIOSST', 'ELRTTY', 'HIMNUQ', 'HLNNRZ', 'HMNOPX',
   'LAPRAS', 'XYABCR', 'QQZZZZ', 'QQYWXV', 'MARRIE',
-];
+]
 
 const Board: FunctionComponent = () => {
   const [letters, setLetters] = useState<string[]>([])
   const [selected, setSelected] = useState<string>('')
-  const [stash, setStash] = useState(Immutable.Set())
-  const [found, setFound] = useState(Immutable.Set())
-  const [start, setStart] = useState<number>()
+  const [stash, setStash] = useState(Immutable.Set(''))
+  const [found, setFound] = useState(Immutable.Set(''))
+  const [start, setStart] = useState<number>(0)
   const [gameStatus, setGameStatus] = useState<boolean>(true)
   const [mounted, setMounted] = useState<boolean>(false)
 
   if (!mounted) {
-    socket.on('letters', (letters) => {
-      setLetters(letters)
-    });
+    socket.on('letters', (letter) => {
+      setLetters(letter)
+    })
 
-    socket.on('solution', (stash) => {
-      setStash(Immutable.Set(stash));
+    socket.on('solution', (stashe) => {
+      setStash(Immutable.Set(stashe))
     })
 
     if (queryBoard) {
-      socket.emit('join', queryBoard);
+      socket.emit('join', queryBoard)
       socket.on('startGame', () => {
-        startGame(false);
+        startGame(false)
       })
     }
   }
@@ -53,52 +58,70 @@ const Board: FunctionComponent = () => {
     setMounted(true)
   }, [])
 
-  const pushFound = (newWord): void =>{
-    const newFound = found.add(newWord);
+  const pushFound = (newWord): void => {
+    const newFound = found.add(newWord)
     setFound(newFound)
   }
 
   const startMultiplayer = (): void => {
-    const roll = (dice): string =>{
-      let diceIndex = Math.floor(Math.random() * dice.length);
-      let die = dice.splice(diceIndex, 1)[0];
-      let stringIndex = Math.floor(Math.random() * die.length);
+    const roll = (dicer): string => {
+      const diceIndex = Math.floor(Math.random() * dicer.length)
+      const die = dicer.splice(diceIndex, 1)[0]
+      const stringIndex = Math.floor(Math.random() * dicer.length)
 
-      return die[stringIndex];
+      return die[stringIndex]
     }
 
-    let lettersStore = '';
+    let lettersStore = ''
     for (let i = 0; i < 25; i++) {
-      lettersStore += roll(dice);
+      lettersStore += roll(dice)
     }
 
-    location.replace('/?board=' + lettersStore);
+    // eslint-disable-next-line no-restricted-globals
+    location.replace(`/?board=${lettersStore}`)
   }
 
   const startGame = (startOtherPlayersGames): void => {
     socket.emit('start', {
       letters: queryBoard,
-      startOtherPlayersGames
-    });
+      startOtherPlayersGames,
+    })
 
-    setStart(Date.now()),
+    setStart(Date.now())
     setFound(Immutable.Set())
     setGameStatus(false)
   }
 
-  const gameOver = (gameStatus: boolean): void => {
-    setGameStatus(gameStatus)
+  const gameOver = (status: boolean): void => {
+    setGameStatus(status)
   }
 
   return (
     <div className="row">
       <div className="col-md-6 col-sm-7">
-        <Controls letters={letters} selected={selected} stash={stash} found={found} start={start} gameStatus={gameStatus} startGame={startGame} gameOver={gameOver} />
+        <Controls start={start} gameStatus={gameStatus} startGame={startGame} gameOver={gameOver} />
         <button onClick={startMultiplayer} className="btn btn-sm btn-primary btn3d">Multiplayer</button>
-        <Selection setSelected={setSelected} letters={letters} selected={selected} stash={stash} found={found} start={start} gameStatus={gameStatus} pushFound={pushFound} />
+        <Selection
+          setSelected={setSelected}
+          letters={letters}
+          selected={selected}
+          stash={stash}
+          found={found}
+          start={start}
+          gameStatus={gameStatus}
+          pushFound={pushFound}
+        />
       </div>
       <div className="col-md-6 col-sm-5">
-        <Score letters={letters} selected={selected} stash={stash} found={found} start={start} gameStatus={gameStatus} setSelected={setSelected} />
+        <Score
+          letters={letters}
+          selected={selected}
+          stash={stash}
+          found={found}
+          start={start}
+          gameStatus={gameStatus}
+          setSelected={setSelected}
+        />
       </div>
     </div>
   )
