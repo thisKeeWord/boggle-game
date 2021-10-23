@@ -112,7 +112,12 @@ const Board: FunctionComponent = () => {
         />
       </div>
       <div className="col-md-6 col-sm-5">
-        <Score stash={stash} found={found} gameStatus={gameStatus} />
+        <Score
+          stash={stash}
+          found={found}
+          gameStatus={gameStatus}
+          setSelected={setSelected}
+        />
       </div>
     </div>
   )

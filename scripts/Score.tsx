@@ -1,4 +1,6 @@
-import React, { FunctionComponent, memo } from 'react'
+import React, {
+  Dispatch, FunctionComponent, memo, SetStateAction,
+} from 'react'
 import Immutable from 'immutable'
 import { groupBy } from 'lodash'
 import ScoreCard from './ScoreCard'
@@ -19,13 +21,14 @@ interface ScoreProps {
   stash: Set<any>
   found: Set<any>
   gameStatus: boolean
+  setSelected: Dispatch<SetStateAction<string>>
 }
 
 const Score: FunctionComponent<ScoreProps> = (props: ScoreProps) => {
   const foundGroups = groupBy([...props.found], (word) => Math.min(word.length, 10))
   const wordGroups = groupBy([...props.stash], (word) => Math.min(word.length, 10))
 
-  const scoreCards: Element[] = []
+  const scoreCards: any[] = []
   let score = 0
   // eslint-disable-next-line no-restricted-syntax, prefer-const, guard-for-in
   for (let key in wordGroups) {
