@@ -31,6 +31,8 @@ const Selection: FunctionComponent<SelectionProps> = (props: SelectionProps) => 
     props.setSelected(selected)
   }
 
+  console.log(props.letters, 'ketters')
+
   const boardHasWord = (e) => {
     e.preventDefault()
     const word = e.target.word.value.toUpperCase()

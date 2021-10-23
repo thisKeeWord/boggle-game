@@ -38,6 +38,7 @@ const Board: FunctionComponent = () => {
 
   if (!mounted) {
     socket.on('letters', (letter) => {
+      console.log(letter, 'socket letter')
       setLetters(letter)
     })
 
@@ -96,6 +97,7 @@ const Board: FunctionComponent = () => {
   }
 
   console.log(stash, 'stash')
+  console.log(letters, 'letters yoyoyo')
 
   return (
     <div className="row">
