@@ -4,9 +4,9 @@
   "description": "Boggle",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon server/server.ts",
-    "start-dev": "gulp",
-    "build": "export NODE_ENV=production; gulp build"
+    "start": "nodemon --watch \"./\" --ext \"ts,tsx,json\" --exec \"ts-node\" server/server.ts",
+    "client": "webpack --config ./webpack.config.js --progress",
+    "heroku-postinstall": "webpack --env prod"
   },
   "keywords": [
     "react",
@@ -42,7 +42,8 @@
     "ts-node": "^10.3.0",
     "typescript": "^4.4.4",
     "webpack": "^5.59.0",
-    "webpack-cli": "^4.9.1"
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^3.11.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.14.1",
@@ -55,8 +56,6 @@
     "@types/socket.io-client": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
-    "babelify": "^7.2.0",
-    "browserify": "^13.0.0",
     "eslint": "^7.23.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-import": "^0.13.0",
@@ -64,17 +63,7 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.1",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-nodemon": "^2.0.6",
-    "gulp-notify": "^2.2.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^5.0.0",
-    "gulp-sourcemaps": "^1.6.0",
     "jest": "^27.3.1",
-    "ts-jest": "^27.0.7",
-    "uglifyify": "^3.0.1",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.7.0"
+    "ts-jest": "^27.0.7"
   }
 }

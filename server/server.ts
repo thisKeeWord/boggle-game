@@ -1,20 +1,20 @@
-/* eslint-disable no-var, strict */
-// var webpack = require('webpack');
-// var WebpackDevServer = require('webpack-dev-server');
-var express = require('express');
+// const webpack = require('webpack');
+// const WebpackDevServer = require('webpack-dev-server');
+const express = require('express');
 
-var app = express();
-var http = require('http');
-var compression = require('compression');
-// var config = require('./webpack.config');
-// var app = new WebpackDevServer(webpack(config), {
+const app = express();
+const http = require('http');
+const compression = require('compression');
+// const config = require('./webpack.config');
+// const app = new WebpackDevServer(webpack(config), {
 //   publicPath: config.output.publicPath,
 //   hot: true,
 //   historyApiFallback: true
 // });
-var server = http.Server(app)
-var io = require('socket.io')(server)
-var Boggle = require('solve-boggle')
+const server = http.Server(app)
+const io = require('socket.io')(server)
+const Boggle = require('solve-boggle')
+const path = require('path')
 
 io.on('connection', (socket) => {
   socket.on('error', (err) => {
@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
 })
 
 app.use(compression())
-app.use(express.static(__dirname))
+app.use(express.static(path.join(__dirname, './../')));
 
 const port = process.env.PORT || 3000
 server.listen(port, console.log.bind(console, `listening at http://localhost:${port}`))

@@ -28,6 +28,7 @@ const Score: FunctionComponent<ScoreProps> = (props: ScoreProps) => {
   const foundGroups = groupBy([...props.found], (word) => Math.min(word.length, 10))
   const wordGroups = groupBy([...props.stash], (word) => Math.min(word.length, 10))
 
+  console.log(wordGroups, 'wordGroup')
   const scoreCards: any[] = []
   let score = 0
   // eslint-disable-next-line no-restricted-syntax, prefer-const, guard-for-in
@@ -61,6 +62,11 @@ const Score: FunctionComponent<ScoreProps> = (props: ScoreProps) => {
 }
 
 function areEqual(prevProps, nextProps) {
+  console.log(prevProps, 'prev')
+  console.log(nextProps, 'next')
+  console.log(nextProps.stash.size !== prevProps.stash.size,
+    !is(nextProps.found, prevProps.found),
+    nextProps.gameStatus !== prevProps.gameStatus)
   return (
     nextProps.stash.size !== prevProps.stash.size
     || !is(nextProps.found, prevProps.found)

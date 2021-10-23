@@ -9,6 +9,7 @@ interface ScoreCardProps {
 }
 
 const ScoreCard: FunctionComponent<ScoreCardProps> = (props: ScoreCardProps) => {
+  console.log('yoyoyo')
   const foundLabels: any[] = []
   const wordLabels: any[] = [];
   [...props.found].forEach((word, i) => {
@@ -24,7 +25,7 @@ const ScoreCard: FunctionComponent<ScoreCardProps> = (props: ScoreCardProps) => 
     )
   })
 
-  if (props.gameStatus) {
+  if (!props.gameStatus) {
     [...props.stash].forEach((word, i) => {
       if (![...props.found].includes(word)) {
         wordLabels.push(

@@ -65,7 +65,7 @@ const Board: FunctionComponent = () => {
   const startMultiplayer = (): void => {
     const roll = (dicer): string => {
       const diceIndex = Math.floor(Math.random() * dicer.length)
-      const die = dicer.splice(diceIndex, 1)[0]
+      const die = dice.splice(diceIndex, 1)[0]
       const stringIndex = Math.floor(Math.random() * dicer.length)
 
       return die[stringIndex]
@@ -94,6 +94,8 @@ const Board: FunctionComponent = () => {
   const gameOver = (status: boolean): void => {
     setGameStatus(status)
   }
+
+  console.log(stash, 'stash')
 
   return (
     <div className="row">
