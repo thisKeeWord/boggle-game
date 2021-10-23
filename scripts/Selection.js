@@ -58,8 +58,12 @@ export default class Selection extends Component {
       let nextChar = button.text()
       nextChar = nextChar === 'Qu' ? 'Q' : nextChar
       word += nextChar
-      if (depth === target.length - 1) { return word === target ? that.highlight(path) : false }
-      if (nextChar !== target[depth]) { return false }
+      if (depth === target.length - 1) {
+        return word === target ? that.highlight(path) : false
+      }
+      if (nextChar !== target[depth]) {
+        return false
+      }
       visited[y][x] = true
       if (has(y - 1, x - 1) && !visited[y - 1][x - 1]) { search(y - 1, x - 1, word, path, depth + 1) }
       if (has(y - 1, x) && !visited[y - 1][x]) { search(y - 1, x, word, path, depth + 1) }
@@ -84,7 +88,16 @@ export default class Selection extends Component {
   render() {
     let buttons = [], inputForm = (<div />)
     for (let i = 0; i < 25; i++) {
-      buttons.push(<button className="btn btn3d btn-white letter" key={i} data-row={Math.floor(i / 5)} data-col={i % 5} onClick={this.pushLetter}>{this.props.letters[i] === 'Q' ? 'Qu' : this.props.letters[i]}</button>)
+      buttons.push(
+        <button
+          className="btn btn3d btn-white letter"
+          key={i}
+          data-row={Math.floor(i / 5)}
+          data-col={i % 5}
+          onClick={this.pushLetter}
+        >{this.props.letters[i] === 'Q' ? 'Qu' : this.props.letters[i]}
+        </button>
+      )
     }
     if (!this.props.gameStatus) {
       inputForm = (
@@ -99,7 +112,7 @@ export default class Selection extends Component {
         <div id="board">
           {buttons}
         </div>
-        { inputForm}
+        {inputForm}
       </div>
     )
   }

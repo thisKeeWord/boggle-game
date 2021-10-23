@@ -12,14 +12,24 @@ export default class Clock extends Component {
   }
 
   componentDidUpdate() {
-    if (!this.props.start || idle) return
-    if (this.props.gameStatus) { this.setState({ timeLeft: totalTime }) }
+    if (!this.props.start || idle) {
+      return
+    }
+    if (this.props.gameStatus) {
+      this.setState({
+        timeLeft: totalTime
+      })
+    }
     if (this.state.timeLeft <= 0) {
       this.props.gameOver(true)
       return idle = null
     }
-    // this is a weird looking timeout right? shouldn't it just be 1000ms? If you set it to 1000 then it will be around 1002 to 1006 because it has to wait for the event loop.
-    // I'm correcting for this by measuring how long it was since the previous tick, so if it took 1006ms the previous time, wait only 994ms this time.
+    /**
+     * Odd timeout because...
+     * If you set it to 1000, it will be around 1002ms to 1006ms because it has to wait for the event loop.
+     * Fixed by measuring how long it was since the previous tick,
+     * so if it previously took 1006ms, this time it will be 994ms.
+    **/
     let timeout = 0;;
     let timeDiff = Date.now() - prevTick
     timeDiff > 1000 ? timeout = 2000 - timeDiff : timeout = 1000

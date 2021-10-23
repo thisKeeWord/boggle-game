@@ -27,13 +27,24 @@ export default class Score extends Component {
   }
 
   render() {
-    let foundGroups = _.groupBy([...this.props.found], word => Math.min(word.length, 10)),
-      wordGroups = _.groupBy([...this.props.stash], word => Math.min(word.length, 10)),
-      scoreCards = [],
-      score = 0
+    let foundGroups = _.groupBy([...this.props.found], word => Math.min(word.length, 10))
+    let wordGroups = _.groupBy([...this.props.stash], word => Math.min(word.length, 10))
+    let scoreCards = []
+    let score = 0
     for (let key in wordGroups) {
-      if (foundGroups[key]) { score += this.state.points[key] * foundGroups[key].length }
-      scoreCards.push(<ScoreCard len={key} key={key} found={foundGroups[key] || []} stash={wordGroups[key]} gameStatus={this.props.gameStatus} setSelected={this.props.setSelected} />)
+      if (foundGroups[key]) {
+        score += this.state.points[key] * foundGroups[key].length
+      }
+      scoreCards.push(
+        <ScoreCard
+          len={key}
+          key={key}
+          found={foundGroups[key] || []}
+          stash={wordGroups[key]}
+          gameStatus={this.props.gameStatus}
+          setSelected={this.props.setSelected}
+        />
+      )
     }
     return (
       <div className="score">
