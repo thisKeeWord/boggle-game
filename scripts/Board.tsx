@@ -105,8 +105,6 @@ const Board: FunctionComponent = () => {
           letters={letters}
           selected={selected}
           stash={stash}
-          found={found}
-          start={start}
           gameStatus={gameStatus}
           pushFound={pushFound}
         />

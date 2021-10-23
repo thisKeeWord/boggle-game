@@ -1,45 +1,58 @@
-import React, { Component } from 'react'
+import React, {
+  Dispatch, FunctionComponent, SetStateAction, useEffect,
+} from 'react'
 import $ from 'jquery'
 
 let board
 
-export default class Selection extends Component {
-  componentDidMount() {
+interface SelectionProps {
+  stash: Set<any>
+  gameStatus: boolean
+  setSelected: Dispatch<SetStateAction<string>>
+  selected: string
+  // eslint-disable-next-line no-unused-vars
+  pushFound: (newWord: any) => void
+  letters: string[]
+}
+
+const Selection: FunctionComponent<SelectionProps> = (props: SelectionProps) => {
+  useEffect(() => {
     board = $('#board')
-  }
+  }, [])
 
-  componentWillReceiveProps(props) {
+  useEffect(() => {
     board.find('button').removeClass('active')
-    this.pressSelection(props.selected)
-  }
+    pressSelection(props.selected)
+  }, [props])
 
-  selectWord(e) {
+  const selectWord = (e) => {
     e.preventDefault()
     const selected = e.target.value
-    this.props.setSelected(selected)
+    props.setSelected(selected)
   }
 
-  boardHasWord(e) {
+  const boardHasWord = (e) => {
     e.preventDefault()
     const word = e.target.word.value.toUpperCase()
-    if (this.props.stash.contains(word)) {
+    if ([...props.stash].includes(word)) {
       e.target.word.value = ''
-      this.props.pushFound(word)
-      this.props.setSelected('')
+      props.pushFound(word)
+      props.setSelected('')
     }
   }
 
-  pushLetter(e) {
+  const pushLetter = (e) => {
     const char = e.target.innerText
-    const input = document.getElementById('word-input')
-    input.value += char
-    const event = new Event('input', { bubbles: true })
-    input.dispatchEvent(event)
+    const input = document.getElementById('word-input') as HTMLInputElement
+    if (input) {
+      input.value += char
+      const event = new Event('input', { bubbles: true })
+      input.dispatchEvent(event)
+    }
   }
 
-  pressSelection(target) {
+  const pressSelection = (target) => {
     target = target.toUpperCase().replace('QU', 'Q')
-    const that = this
     const visited = [
       [false, false, false, false, false],
       [false, false, false, false, false],
@@ -59,7 +72,7 @@ export default class Selection extends Component {
       let nextChar = button.text()
       nextChar = nextChar === 'Qu' ? 'Q' : nextChar
       word += nextChar
-      if (depth === target.length - 1) { return word === target ? that.highlight(path) : false }
+      if (depth === target.length - 1) { return word === target ? highlight(path) : false }
       if (nextChar !== target[depth]) { return false }
       visited[y][x] = true
       if (has(y - 1, x - 1) && !visited[y - 1][x - 1]) { search(y - 1, x - 1, word, path, depth + 1) }
@@ -78,31 +91,43 @@ export default class Selection extends Component {
     }
   }
 
-  highlight(path) {
+  const highlight = (path) => {
     $(path).addClass('active')
   }
 
-  render() {
-    const buttons = []; let
-      inputForm = (<div />)
-    for (let i = 0; i < 25; i++) {
-      buttons.push(<button className="btn btn3d btn-white letter" key={i} data-row={Math.floor(i / 5)} data-col={i % 5} onClick={this.pushLetter}>{this.props.letters[i] === 'Q' ? 'Qu' : this.props.letters[i]}</button>)
-    }
-    if (!this.props.gameStatus) {
-      inputForm = (
-        <form id="word-form" onSubmit={this.boardHasWord.bind(this)} className="animated slideInLeft">
-          <input id="word-input" type="text" name="word" pattern="[a-zA-Z]+" placeholder="Type words here" onChange={this.selectWord.bind(this)} autoFocus />
-          <button type="submit" style={{ marginLeft: '10px' }}>Submit</button>
-        </form>
-      )
-    }
-    return (
-      <div>
-        <div id="board">
-          {buttons}
-        </div>
-        { inputForm}
-      </div>
+  const buttons: any[] = []
+  let inputForm = (<div />)
+  for (let i = 0; i < 25; i++) {
+    buttons.push(
+      <button
+        className="btn btn3d btn-white letter"
+        key={i}
+        data-row={Math.floor(i / 5)}
+        data-col={i % 5}
+        onClick={pushLetter}
+      >
+        {props.letters[i] === 'Q' ? 'Qu' : props.letters[i]}
+
+      </button>,
     )
   }
+  if (!props.gameStatus) {
+    inputForm = (
+      <form id="word-form" onSubmit={boardHasWord} className="animated slideInLeft">
+        <input id="word-input" type="text" name="word" pattern="[a-zA-Z]+" placeholder="Type words here" onChange={selectWord} autoFocus />
+        <button type="submit" style={{ marginLeft: '10px' }}>Submit</button>
+      </form>
+    )
+  }
+
+  return (
+    <div>
+      <div id="board">
+        {buttons}
+      </div>
+      { inputForm}
+    </div>
+  )
 }
+
+export default Selection
