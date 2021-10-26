@@ -31,7 +31,6 @@ io.on('connection', socket => {
 
 app.use(compression())
 app.use(express.static(__dirname))
-// app.use(express.static(path.join(__dirname, './../')))
 
-var port = process.env.PORT || 3000
+const port = process.env.PORT || 3000
 server.listen(port, console.log.bind(console, 'listening at http://localhost:' + port))
