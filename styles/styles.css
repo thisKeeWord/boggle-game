@@ -230,14 +230,14 @@ body {
   color: #1f4288;
 }
 
-.buttonsAndStuff {
+.buttons-and-clock {
   position: relative;
   height: 80px;
   max-width: 420px;
   margin: 0 auto;
 }
 
-.buttonsAndStuff .btn3d {
+.buttons-and-clock .btn3d {
   margin-top: 20px;
   width: 150px;
 }
