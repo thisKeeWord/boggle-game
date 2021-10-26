@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-let idle, prevTick
+import { totalTime } from '../constants'
+let idle
+let prevTick
 
-const totalTime = 420000
+
 
 export default class Clock extends Component {
   constructor() {
@@ -15,11 +17,13 @@ export default class Clock extends Component {
     if (!this.props.start || idle) {
       return
     }
-    if (this.props.gameStatus) {
+
+    if (this.props.gameStart) {
       this.setState({
         timeLeft: totalTime
       })
     }
+
     if (this.state.timeLeft <= 0) {
       this.props.gameOver(true)
       return idle = null
@@ -30,9 +34,15 @@ export default class Clock extends Component {
      * Fixed by measuring how long it was since the previous tick,
      * so if it previously took 1006ms, this time it will be 994ms.
     **/
-    let timeout = 0;;
+    let timeout = 0
     let timeDiff = Date.now() - prevTick
-    timeDiff > 1000 ? timeout = 2000 - timeDiff : timeout = 1000
+
+    if (timeDiff > 1000) {
+      timeout = 2000 - timeDiff
+    } else {
+      timeout = 1000
+    }
+
     prevTick = Date.now()
     idle = setTimeout(() => {
       idle = null
@@ -45,11 +55,14 @@ export default class Clock extends Component {
   convertTime(milli) {
     let seconds = milli / 1000
     let minutes = Math.floor(seconds / 60).toString()
+
     seconds = Math.floor(seconds % 60).toString()
+
     if (seconds.length === 1) {
       seconds = '0' + seconds
     }
-    return minutes + ':' + seconds
+
+    return `${minutes}:${seconds}`
   }
 
   render() {

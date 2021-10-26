@@ -21,7 +21,7 @@ export default class Selection extends Component {
   boardHasWord(e) {
     e.preventDefault()
     let word = e.target.word.value.toUpperCase()
-    if (this.props.stash.contains(word)) {
+    if (this.props.wordsCache.contains(word)) {
       e.target.word.value = ''
       this.props.pushFound(word)
       this.props.setSelected('')
@@ -29,13 +29,14 @@ export default class Selection extends Component {
   }
 
   pushLetter(e) {
-    let char = e.target.innerText
+    const char = e.target.innerText
     let input = document.getElementById('word-input')
     input.value += char
     let event = new Event('input', { bubbles: true })
     input.dispatchEvent(event)
   }
 
+  // find pathing
   pressSelection(target) {
     target = target.toUpperCase().replace('QU', 'Q')
     let that = this
@@ -86,7 +87,7 @@ export default class Selection extends Component {
   }
 
   render() {
-    let buttons = [], inputForm = (<div />)
+    const buttons = []
     for (let i = 0; i < 25; i++) {
       buttons.push(
         <button
@@ -95,24 +96,25 @@ export default class Selection extends Component {
           data-row={Math.floor(i / 5)}
           data-col={i % 5}
           onClick={this.pushLetter}
-        >{this.props.letters[i] === 'Q' ? 'Qu' : this.props.letters[i]}
+        >
+          {this.props.letters[i] === 'Q' ? 'Qu' : this.props.letters[i]}
         </button>
       )
     }
-    if (!this.props.gameStatus) {
-      inputForm = (
-        <form id="word-form" onSubmit={this.boardHasWord.bind(this)} className="animated slideInLeft">
-          <input id="word-input" type="text" name="word" pattern="[a-zA-Z]+" placeholder="Type words here" onChange={this.selectWord.bind(this)} autoFocus />
-          <button type="submit" style={{ marginLeft: '10px' }}>Submit</button>
-        </form>
-      )
-    }
+
     return (
       <div>
         <div id="board">
           {buttons}
         </div>
-        {inputForm}
+        {!this.props.gameStart ? (
+          <form id="word-form" onSubmit={this.boardHasWord.bind(this)} className="animated slideInLeft">
+            <input id="word-input" type="text" name="word" pattern="[a-zA-Z]+" placeholder="Type words here" onChange={this.selectWord.bind(this)} autoFocus />
+            <button type="submit" style={{ marginLeft: '10px' }}>Submit</button>
+          </form>
+        ) : (
+          <div />
+        )}
       </div>
     )
   }

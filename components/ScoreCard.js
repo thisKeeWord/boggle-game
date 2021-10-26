@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 
 export default class ScoreCard extends Component {
   render() {
-    let foundLabels = [], wordLabels = []
-    this.props.found.map((word, i) => {
-      foundLabels.push(
+    const wordLabels = []
+    const foundLabels = this.props.wordsFound.map((word, i) => {
+      return (
         <span
           className="label label-warning"
           key={i}
@@ -15,9 +15,10 @@ export default class ScoreCard extends Component {
         </span>
         , ' ')
     })
-    if (this.props.gameStatus) {
-      this.props.stash.map((word, i) => {
-        if (!this.props.found.includes(word)) {
+
+    if (this.props.gameStart) {
+      this.props.wordsCache.map((word, i) => {
+        if (!this.props.wordsFound.includes(word)) {
           wordLabels.push(
             <span
               className="label label-default"
@@ -31,7 +32,7 @@ export default class ScoreCard extends Component {
         }
       })
     }
-    const percentage = Math.floor(this.props.found.length / this.props.stash.length * 100)
+    const percentage = Math.floor(this.props.wordsFound.length / this.props.wordsCache.length * 100)
 
     return (
       <div className="panel score-card animated slideInRight">
