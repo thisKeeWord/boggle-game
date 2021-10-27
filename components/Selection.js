@@ -12,13 +12,12 @@ export default class Selection extends Component {
     this.pressSelection(props.selected)
   }
 
-  selectWord(e) {
+  selectWord = (e) => {
     e.preventDefault()
-    let selected = e.target.value
-    this.props.setSelected(selected)
+    this.props.setSelected(e.target.value)
   }
 
-  boardHasWord(e) {
+  boardHasWord = (e) => {
     e.preventDefault()
     let word = e.target.word.value.toUpperCase()
     if (this.props.wordsCache.contains(word)) {
@@ -28,7 +27,7 @@ export default class Selection extends Component {
     }
   }
 
-  pushLetter(e) {
+  pushLetter = (e) => {
     const char = e.target.innerText
     let input = document.getElementById('word-input')
     input.value += char
@@ -37,9 +36,9 @@ export default class Selection extends Component {
   }
 
   // find pathing
-  pressSelection(target) {
+  pressSelection = (target) => {
     target = target.toUpperCase().replace('QU', 'Q')
-    let that = this
+    const that = this
     let visited = [
       [false, false, false, false, false],
       [false, false, false, false, false],
@@ -47,6 +46,7 @@ export default class Selection extends Component {
       [false, false, false, false, false],
       [false, false, false, false, false],
     ]
+
     for (let y = 0; y < 5; y++) {
       for (let x = 0; x < 5; x++) {
         search(y, x, '', [], 0)
@@ -54,7 +54,7 @@ export default class Selection extends Component {
     }
 
     function search(y, x, word, path, depth) {
-      let button = board.find('[data-row=' + y + '][data-col=' + x + ']')
+      const button = board.find('[data-row=' + y + '][data-col=' + x + ']')
       path = path.concat(button[0])
       let nextChar = button.text()
       nextChar = nextChar === 'Qu' ? 'Q' : nextChar
@@ -65,15 +65,33 @@ export default class Selection extends Component {
       if (nextChar !== target[depth]) {
         return false
       }
+
       visited[y][x] = true
-      if (has(y - 1, x - 1) && !visited[y - 1][x - 1]) { search(y - 1, x - 1, word, path, depth + 1) }
-      if (has(y - 1, x) && !visited[y - 1][x]) { search(y - 1, x, word, path, depth + 1) }
-      if (has(y - 1, x + 1) && !visited[y - 1][x + 1]) { search(y - 1, x + 1, word, path, depth + 1) }
-      if (has(y, x - 1) && !visited[y][x - 1]) { search(y, x - 1, word, path, depth + 1) }
-      if (has(y, x + 1) && !visited[y][x + 1]) { search(y, x + 1, word, path, depth + 1) }
-      if (has(y + 1, x - 1) && !visited[y + 1][x - 1]) { search(y + 1, x - 1, word, path, depth + 1) }
-      if (has(y + 1, x) && !visited[y + 1][x]) { search(y + 1, x, word, path, depth + 1) }
-      if (has(y + 1, x + 1) && !visited[y + 1][x + 1]) { search(y + 1, x + 1, word, path, depth + 1) }
+      if (has(y - 1, x - 1) && !visited[y - 1][x - 1]) {
+        search(y - 1, x - 1, word, path, depth + 1)
+      }
+      if (has(y - 1, x) && !visited[y - 1][x]) {
+        search(y - 1, x, word, path, depth + 1)
+      }
+      if (has(y - 1, x + 1) && !visited[y - 1][x + 1]) {
+        search(y - 1, x + 1, word, path, depth + 1)
+      }
+      if (has(y, x - 1) && !visited[y][x - 1]) {
+        search(y, x - 1, word, path, depth + 1)
+      }
+      if (has(y, x + 1) && !visited[y][x + 1]) {
+        search(y, x + 1, word, path, depth + 1)
+      }
+      if (has(y + 1, x - 1) && !visited[y + 1][x - 1]) {
+        search(y + 1, x - 1, word, path, depth + 1)
+      }
+      if (has(y + 1, x) && !visited[y + 1][x]) {
+        search(y + 1, x, word, path, depth + 1)
+      }
+      if (has(y + 1, x + 1) && !visited[y + 1][x + 1]) {
+        search(y + 1, x + 1, word, path, depth + 1)
+      }
+
       visited[y][x] = false
     }
 
@@ -82,34 +100,39 @@ export default class Selection extends Component {
     }
   }
 
-  highlight(path) {
+  highlight = (path) => {
     $(path).addClass('active')
   }
 
   render() {
-    const buttons = []
-    for (let i = 0; i < 25; i++) {
-      buttons.push(
-        <button
-          className="btn btn3d btn-white letter"
-          key={i}
-          data-row={Math.floor(i / 5)}
-          data-col={i % 5}
-          onClick={this.pushLetter}
-        >
-          {this.props.letters[i] === 'Q' ? 'Qu' : this.props.letters[i]}
-        </button>
-      )
-    }
-
     return (
       <div>
         <div id="board">
-          {buttons}
+          {[...Array(25)].map((el, i) => {
+            return (
+              <button
+                className="btn btn3d btn-white letter"
+                key={i}
+                data-row={Math.floor(i / 5)}
+                data-col={i % 5}
+                onClick={this.pushLetter}
+              >
+                {this.props.letters[i] === 'Q' ? 'Qu' : this.props.letters[i]}
+              </button>
+            )
+          })}
         </div>
         {!this.props.gameStart ? (
-          <form id="word-form" onSubmit={this.boardHasWord.bind(this)} className="animated slideInLeft">
-            <input id="word-input" type="text" name="word" pattern="[a-zA-Z]+" placeholder="Type words here" onChange={this.selectWord.bind(this)} autoFocus />
+          <form id="word-form" onSubmit={this.boardHasWord} className="animated slideInLeft">
+            <input
+              id="word-input"
+              type="text"
+              name="word"
+              pattern="[a-zA-Z]+"
+              placeholder="Type words here"
+              onChange={this.selectWord}
+              autoFocus
+            />
             <button type="submit" style={{ marginLeft: '10px' }}>Submit</button>
           </form>
         ) : (
