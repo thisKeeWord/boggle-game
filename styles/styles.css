@@ -1,10 +1,17 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 #boggle {
-  background-color: #f57921;
+  background-color: orange;
+  height: 100%;
+  width: 100%;
 }
 
 #board {
   border: 4px solid #ffca08;
-  background-color: #398bd4;
+  background-color: cornflowerblue;
   height: 440px;
   width: 390px;
   margin: 0 auto;

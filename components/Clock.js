@@ -52,7 +52,7 @@ export default class Clock extends Component {
     }, timeout)
   }
 
-  convertTime(milli) {
+  convertTime = (milli) => {
     let seconds = milli / 1000
     let minutes = Math.floor(seconds / 60).toString()
 

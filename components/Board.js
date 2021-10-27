@@ -5,10 +5,10 @@ import Immutable from 'immutable'
 import Controls from './Controls'
 import Selection from './Selection'
 import Score from './Score'
+import { dice } from '../constants'
 const socket = io()
 const queryBoard = location.search.slice(7)
 
-import { dice } from '../constants'
 
 export default class Board extends Component {
   constructor() {
@@ -24,11 +24,15 @@ export default class Board extends Component {
   }
 
   componentWillMount() {
-    socket.on('letters', letters => {
+    socket.on('letters', (letters) => {
       this.setState({ letters: letters })
     })
 
-    socket.on('solution', stash => this.setState({ wordsCache: Immutable.Set(stash) }))
+    socket.on('solution', (stash) => {
+      this.setState({
+        wordsCache: Immutable.Set(stash)
+      })
+    })
 
     if (queryBoard) {
       socket.emit('join', queryBoard)
@@ -36,21 +40,22 @@ export default class Board extends Component {
     }
   }
 
-  setSelected(selected) {
+  setSelected = (selected) => {
     this.setState({
       selected
     })
   }
 
-  pushFound(newWord) {
+  pushFound = (newWord) => {
     const newFound = this.state.wordsFound.add(newWord)
+
     this.setState({
       wordsFound: newFound
     })
   }
 
   // roll the dice to create the board of letters
-  startMultiplayer() {
+  startMultiplayer = () => {
     function roll(dice) {
       const diceIndex = Math.floor(Math.random() * dice.length)
       const die = dice.splice(diceIndex, 1)[0]
@@ -67,7 +72,7 @@ export default class Board extends Component {
     location.replace('/?board=' + lettersUrl)
   }
 
-  startGame(startOtherPlayersGames) {
+  startGame = (startOtherPlayersGames) => {
     socket.emit('start', {
       letters: queryBoard,
       startOtherPlayersGames
@@ -80,7 +85,7 @@ export default class Board extends Component {
     })
   }
 
-  gameOver(gameStatus) {
+  gameOver = (gameStatus) => {
     this.setState({
       gameStart: gameStatus
     })
@@ -93,18 +98,18 @@ export default class Board extends Component {
           <Controls
             start={this.state.start}
             gameStart={this.state.gameStart}
-            startGame={this.startGame.bind(this)}
-            gameOver={this.gameOver.bind(this)}
+            startGame={this.startGame}
+            gameOver={this.gameOver}
           />
           <button className="btn btn-sm btn-primary btn3d" onClick={this.startMultiplayer} >Multiplayer</button>
           <Selection
-            setSelected={this.setSelected.bind(this)}
+            setSelected={this.setSelected}
             letters={this.state.letters}
             selected={this.state.selected}
             wordsCache={this.state.wordsCache}
             gameStart={this.state.gameStart}
-            setSelected={this.setSelected.bind(this)}
-            pushFound={this.pushFound.bind(this)}
+            setSelected={this.setSelected}
+            pushFound={this.pushFound}
           />
         </div>
 
@@ -113,7 +118,7 @@ export default class Board extends Component {
             wordsCache={this.state.wordsCache}
             wordsFound={this.state.wordsFound}
             gameStart={this.state.gameStart}
-            setSelected={this.setSelected.bind(this)}
+            setSelected={this.setSelected}
           />
         </div>
       </div>
