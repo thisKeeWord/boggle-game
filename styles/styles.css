@@ -1,12 +1,7 @@
 html, body {
   height: 100%;
   width: 100%;
-}
-
-#boggle {
   background-color: orange;
-  height: 100%;
-  width: 100%;
 }
 
 #board {
@@ -199,10 +194,6 @@ h1 {
 
 .slideInRight {
   animation-name: slideInRight;
-}
-
-body {
-  background-color: #ff913b;
 }
 
 .board-wrap {
