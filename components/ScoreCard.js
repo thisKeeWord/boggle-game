@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+import cx from 'classnames'
 
 export default class ScoreCard extends Component {
   render() {
     const wordLabels = []
-    const foundLabels = this.props.wordsFound.map((word, i) => {
-      return (
+    const foundLabels = []
+    this.props.wordsFound.forEach((word, i) => {
+      foundLabels.push(
         <span
-          className="label label-warning"
+          className="label label-success"
           key={i}
           onMouseEnter={() => this.props.setSelected(word)}
           onMouseLeave={() => this.props.setSelected('')}
@@ -32,7 +34,8 @@ export default class ScoreCard extends Component {
         }
       })
     }
-    const percentage = Math.floor(this.props.wordsFound.length / this.props.wordsCache.length * 100)
+    const progress = Math.floor(this.props.wordsFound.length / this.props.wordsCache.length * 100)
+    console.log(this.props.wordsCache)
 
     return (
       <div className="panel score-card animated slideInRight">
@@ -40,10 +43,20 @@ export default class ScoreCard extends Component {
           {this.props.len}-letter
         </div>
         <div className="panel-body">
+          <div>
+            <div style={{ marginLeft: `calc(${progress}% - 10px`, transition: 'margin-left 0.6s' }}>{progress}%</div>
+          </div>
           <div className="progress">
-            <div className="progress-bar progress-bar-primary" role="progressbar" style={{ width: `${percentage}%` }}>
-              {percentage}%
-            </div>
+            <div
+              className={cx("progress-bar", {
+                "progress-bar-danger": progress < 12,
+                "progress-bar-warning": progress >= 12 && progress < 23,
+                "progress-bar-primary": progress >= 23 && progress < 40,
+                "progress-bar-success": progress >= 40
+              })}
+              role="progressbar"
+              style={{ width: `${progress}%`, height: '20px' }}
+            />
           </div>
           {foundLabels}
           {wordLabels}

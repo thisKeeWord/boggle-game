@@ -220,7 +220,7 @@ body {
 }
 
 .btn3d.btn-white.letter {
-  color: #1f4288;
+  color: midnightblue;
   font-size: 30px;
   width: 65px;
   height: 65px;
@@ -234,7 +234,7 @@ body {
   box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
     0 1px 3px 1px rgba(0, 0, 0, 0.1);
   background: #eee;
-  color: #1f4288;
+  color: midnightblue;
 }
 
 .buttons-and-clock {
