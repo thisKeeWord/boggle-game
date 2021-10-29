@@ -106,20 +106,24 @@ export default class Selection extends Component {
 
   render() {
     const upperCased = this.props.selected.toUpperCase()
-    let addon = <span className="input-group-addon danger" title="invalid word">&#10005;</span>
+    // question mark
+    let wordStatus = (
+      <span className="input-group-addon">&#63;</span>
+    )
 
-    if (upperCased.length < 3) {
-      addon = (
-        <span className="input-group-addon" title="enter 3 letter word">&#63;</span>
-      )
-    } else if (this.props.wordsFound.has(upperCased)) {
-      addon = (
-        <span className="input-group-addon warning" title="already found">&#9888;</span>
-      )
-    } else if (this.props.wordsCache.has(upperCased)) {
-      addon = (
-        <span className="input-group-addon success" title="valid word">&#10003;</span>
-      )
+    // min length for word is 3
+    if (upperCased.length >= 3) {
+      if (this.props.wordsFound.has(upperCased)) {
+        // warning sign
+        wordStatus = (
+          <span className="input-group-addon warn">&#9888;</span>
+        )
+      } else if (this.props.wordsCache.has(upperCased)) {
+        // check mark
+        wordStatus = (
+          <span className="input-group-addon success">&#10003;</span>
+        )
+      }
     }
 
     return (
@@ -145,12 +149,11 @@ export default class Selection extends Component {
               id="word-input"
               type="text"
               name="word"
-              pattern="[a-zA-Z]+"
               placeholder="Type words here"
               onChange={this.selectWord}
               autoFocus
             />
-            <button type="submit" style={{ marginLeft: '10px' }}>{addon}</button>
+            <button type="submit" style={{ marginLeft: '10px' }}>{wordStatus}</button>
           </form>
         ) : (
           <div />
