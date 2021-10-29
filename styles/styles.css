@@ -288,13 +288,8 @@ h1 {
   background-color: limegreen;
   border-color: limegreen;
 }
-.input-group-addon.warning {
+.input-group-addon.warn {
   color: #fff;
   background-color: orange;
   border-color: orange;
-}
-.input-group-addon.danger {
-  color: #fff;
-  background-color: red;
-  border-color: red;
 }
