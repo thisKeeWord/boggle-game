@@ -1,7 +1,7 @@
 html, body {
   height: 100%;
   width: 100%;
-  background-color: orange;
+  background-color: lightblue;
 }
 
 #board {
@@ -208,6 +208,25 @@ h1 {
   justify-content: center;
   align-items: center;
   margin-bottom: 15px;
+  height: 40px;
+}
+
+#word-form > button {
+  padding: 0 !important;
+  border: none !important;
+  height: 40px;
+  width: 40px;
+}
+
+#word-form > input {
+  height: 40px;
+  padding-left: 7px;
+  padding-right: 7px;
+  border: none !important;
+}
+
+#word-form > input:focus {
+  outline: none !important;
 }
 
 .btn3d.btn-white.letter {
@@ -258,4 +277,24 @@ h1 {
 
 .score-card .panel-body {
   padding-top: 0;
+}
+
+
+.input-group-addon {
+  height: 40px;
+}
+.input-group-addon.success {
+  color: #fff;
+  background-color: limegreen;
+  border-color: limegreen;
+}
+.input-group-addon.warning {
+  color: #fff;
+  background-color: orange;
+  border-color: orange;
+}
+.input-group-addon.danger {
+  color: #fff;
+  background-color: red;
+  border-color: red;
 }

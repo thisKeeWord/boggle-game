@@ -105,6 +105,23 @@ export default class Selection extends Component {
   }
 
   render() {
+    const upperCased = this.props.selected.toUpperCase()
+    let addon = <span className="input-group-addon danger" title="invalid word">&#10005;</span>
+
+    if (upperCased.length < 3) {
+      addon = (
+        <span className="input-group-addon" title="enter 3 letter word">&#63;</span>
+      )
+    } else if (this.props.wordsFound.has(upperCased)) {
+      addon = (
+        <span className="input-group-addon warning" title="already found">&#9888;</span>
+      )
+    } else if (this.props.wordsCache.has(upperCased)) {
+      addon = (
+        <span className="input-group-addon success" title="valid word">&#10003;</span>
+      )
+    }
+
     return (
       <div>
         <div id="board">
@@ -133,7 +150,7 @@ export default class Selection extends Component {
               onChange={this.selectWord}
               autoFocus
             />
-            <button type="submit" style={{ marginLeft: '10px' }}>Submit</button>
+            <button type="submit" style={{ marginLeft: '10px' }}>{addon}</button>
           </form>
         ) : (
           <div />
