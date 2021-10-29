@@ -107,6 +107,7 @@ export default class Board extends Component {
             letters={this.state.letters}
             selected={this.state.selected}
             wordsCache={this.state.wordsCache}
+            wordsFound={this.state.wordsFound}
             gameStart={this.state.gameStart}
             setSelected={this.setSelected}
             pushFound={this.pushFound}
