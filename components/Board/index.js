@@ -2,13 +2,15 @@ window.jQuery = window.$ = require('jquery')
 import React, { Component } from 'react'
 import io from 'socket.io-client'
 import Immutable from 'immutable'
-import Controls from './Controls'
-import Selection from './Selection'
-import Score from './Score'
-import { dice } from '../constants'
+import Controls from '../Controls'
+import Selection from '../Selection'
+import Score from '../Score'
+import { dice } from '../../constants'
+
+import './styles.scss'
+
 const socket = io()
 const queryBoard = location.search.slice(7)
-
 
 export default class Board extends Component {
   constructor() {
@@ -101,7 +103,9 @@ export default class Board extends Component {
             startGame={this.startGame}
             gameOver={this.gameOver}
           />
+
           <button className="btn btn-sm btn-primary btn3d" onClick={this.startMultiplayer} >Multiplayer</button>
+
           <Selection
             setSelected={this.setSelected}
             letters={this.state.letters}

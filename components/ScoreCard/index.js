@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import cx from 'classnames'
 
+import './styles.scss'
+
 export default class ScoreCard extends Component {
   render() {
     const wordLabels = []

@@ -1,0 +1,170 @@
+h1 {
+  text-align: center;
+}
+
+.btn3d {
+  position: relative;
+  top: -6px;
+  border: 0;
+  transition: all 40ms linear;
+  margin: 10px 2px;
+
+  &:active:focus,
+  &:focus:hover,
+  &:focus {
+    -moz-outline-style: none;
+    outline: medium none;
+  }
+
+  &:active,
+  &.active {
+    top: 2px;
+  }
+
+  &.btn-white {
+    color: #666666;
+    box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255, 255, 255, 0.1) inset, 0 8px 0 0 #f5f5f5,
+      0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #fff;
+  
+    &.letter {
+      color: midnightblue;
+      font-size: 30px;
+      width: 65px;
+      height: 65px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+
+      &:active,
+      &.active {
+        box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+          0 1px 3px 1px rgba(0, 0, 0, 0.1);
+        background: #eee;
+        color: midnightblue;
+      }
+    }
+  }
+
+  &.btn-white:active,
+  &.btn-white.active {
+    color: #666666;
+    box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+      0 1px 3px 1px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  &.btn-default {
+    color: #666666;
+    box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255, 255, 255, 0.1) inset, 0 8px 0 0 #bebebe,
+      0 8px 8px 1px rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9;
+
+    &:active,
+    &.active {
+      color: #666666;
+      box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+        0 1px 3px 1px rgba(0, 0, 0, 0.1);
+      background-color: #f9f9f9;
+    }
+  }
+
+  &.btn-primary {
+    box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #4d5bbe,
+      0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #4274d7;
+
+    &:active,
+    &.active {
+      box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+        0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #4274d7;
+    }
+  }
+
+  &.btn-success {
+    box-shadow: 0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #5eb924,
+      0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #78d739;
+    
+    &:active,
+    &.active {
+      box-shadow: 0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+      0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #78d739;
+    }
+  }
+
+  &.btn-info {
+    box-shadow: 0 0 0 1px #00a5c3 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #348fd2,
+      0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #39b3d7;
+    
+    &:active,
+    &.active {
+      box-shadow: 0 0 0 1px #00a5c3 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+      0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #39b3d7;
+    }
+  }
+
+  &.btn-warning {
+    box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #d79a34,
+      0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #feaf20;
+    
+    &:active,
+    &.active {
+      box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+      0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #feaf20;
+    }
+  }
+
+  &.btn-danger {
+    box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #aa0000,
+      0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #d73814;
+    
+    &:active,
+    &.active {
+      box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+      0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #d73814;
+    }
+  }
+
+  &.btn-magick {
+    color: #fff;
+    box-shadow: 0 0 0 1px #9a00cd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #9823d5,
+      0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #bb39d7;
+    
+    &:active,
+    &.active {
+      box-shadow: 0 0 0 1px #9a00cd inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+      0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #bb39d7;
+    }
+  }
+}
+
+/*!
+ * animate.css -http://daneden.me/animate
+ * Version - 3.5.1
+ * Licensed under the MIT license - http://opensource.org/licenses/MIT
+ *
+ * Copyright (c) 2016 Daniel Eden
+ */
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  
+  &.infinite {
+    animation-iteration-count: infinite;
+  }
+  
+  &.hinge {
+    animation-duration: 2s;
+  }
+}

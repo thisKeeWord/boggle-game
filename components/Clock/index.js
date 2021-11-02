@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { totalTime } from '../constants'
+import { totalTime } from '../../constants'
+
+import './styles.scss'
+
 let idle
 let prevTick
-
-
 
 export default class Clock extends Component {
   constructor() {
