@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import cx from 'classnames'
 
+import './styles.scss'
+
 export default class ScoreCard extends Component {
   render() {
     const wordLabels = []
@@ -34,8 +36,8 @@ export default class ScoreCard extends Component {
         }
       })
     }
+
     const progress = Math.floor(this.props.wordsFound.length / this.props.wordsCache.length * 100)
-    console.log(this.props.wordsCache)
 
     return (
       <div className="panel score-card animated slideInRight">

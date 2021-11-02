@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import ScoreCard from './ScoreCard'
+import ScoreCard from '../ScoreCard'
 import Immutable from 'immutable'
-import { points } from '../constants'
+import { points } from '../../constants'
+
+import './styles.scss'
+
 const is = Immutable.is
 const _ = {
   groupBy: require('lodash/groupBy'),

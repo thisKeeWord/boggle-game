@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import $ from 'jquery'
+
+import './styles.scss'
+
 let board
 
 export default class Selection extends Component {
   componentDidMount() {
-    board = $('#board')
+    board = $('.board')
   }
 
   componentWillReceiveProps(props) {
@@ -128,7 +131,7 @@ export default class Selection extends Component {
 
     return (
       <div>
-        <div id="board">
+        <div className="board">
           {[...Array(25)].map((el, i) => {
             return (
               <button
@@ -143,8 +146,9 @@ export default class Selection extends Component {
             )
           })}
         </div>
+
         {!this.props.gameStart ? (
-          <form id="word-form" onSubmit={this.boardHasWord} className="animated slideInLeft">
+          <form className="animated slideInLeft word-form" onSubmit={this.boardHasWord}>
             <input
               id="word-input"
               type="text"
