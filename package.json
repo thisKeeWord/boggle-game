@@ -41,7 +41,6 @@
     "socket.io": "^3.1.2",
     "socket.io-client": "^3.1.2",
     "solve-boggle": "^3.0.1",
-    "webpack": "^5.59.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^3.11.0"
   },
@@ -55,6 +54,9 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.1",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "sass": "^1.43.4",
+    "sass-loader": "^12.3.0",
+    "webpack": "^5.61.0"
   }
 }

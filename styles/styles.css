@@ -168,20 +168,36 @@ h1 {
   animation-duration: 2s;
 }
 
-@keyframes slideInLeft {
-  from {
-    transform: translate3d(-100%, 0, 0);
-    visibility: visible;
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
+
+
+/** Controls.js */ 
+.buttons-and-clock {
+  position: relative;
+  height: 80px;
+  max-width: 420px;
+  margin: 0 auto;
 }
 
-.slideInLeft {
-  animation-name: slideInLeft;
+.buttons-and-clock .btn3d {
+  margin-top: 20px;
+  width: 150px;
 }
 
+/** Clock.js */ 
+.clock {
+  display: inline-block;
+  position: absolute;
+  right: 12px;
+  top: 5px;
+  font-size: 40px;
+}
+
+/** Score.js */ 
+.score {
+  padding-top: 10px;
+}
+
+/** ScoreCard.js */ 
 @keyframes slideInRight {
   from {
     transform: translate3d(100%, 0, 0);
@@ -196,8 +212,59 @@ h1 {
   animation-name: slideInRight;
 }
 
-.board-wrap {
-  text-align: center;
+.score-card {
+  line-height: 150%;
+}
+
+.score-card .panel-body {
+  padding-top: 0;
+}
+
+/** Selections.js */
+@keyframes slideInLeft {
+  from {
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInLeft {
+  animation-name: slideInLeft;
+}
+
+.input-group-addon {
+  height: 40px;
+}
+.input-group-addon.success {
+  color: #fff;
+  background-color: limegreen;
+  border-color: limegreen;
+}
+.input-group-addon.warn {
+  color: #fff;
+  background-color: orange;
+  border-color: orange;
+}
+
+.btn3d.btn-white.letter {
+  color: midnightblue;
+  font-size: 30px;
+  width: 65px;
+  height: 65px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn3d.btn-white.letter:active,
+.btn3d.btn-white.letter.active {
+  box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+    0 1px 3px 1px rgba(0, 0, 0, 0.1);
+  background: #eee;
+  color: midnightblue;
 }
 
 #word-form {
@@ -227,69 +294,4 @@ h1 {
 
 #word-form > input:focus {
   outline: none !important;
-}
-
-.btn3d.btn-white.letter {
-  color: midnightblue;
-  font-size: 30px;
-  width: 65px;
-  height: 65px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.btn3d.btn-white.letter:active,
-.btn3d.btn-white.letter.active {
-  box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
-    0 1px 3px 1px rgba(0, 0, 0, 0.1);
-  background: #eee;
-  color: midnightblue;
-}
-
-.buttons-and-clock {
-  position: relative;
-  height: 80px;
-  max-width: 420px;
-  margin: 0 auto;
-}
-
-.buttons-and-clock .btn3d {
-  margin-top: 20px;
-  width: 150px;
-}
-
-.clock {
-  display: inline-block;
-  position: absolute;
-  right: 12px;
-  top: 5px;
-  font-size: 40px;
-}
-
-.score {
-  padding-top: 10px;
-}
-
-.score-card {
-  line-height: 150%;
-}
-
-.score-card .panel-body {
-  padding-top: 0;
-}
-
-
-.input-group-addon {
-  height: 40px;
-}
-.input-group-addon.success {
-  color: #fff;
-  background-color: limegreen;
-  border-color: limegreen;
-}
-.input-group-addon.warn {
-  color: #fff;
-  background-color: orange;
-  border-color: orange;
 }
