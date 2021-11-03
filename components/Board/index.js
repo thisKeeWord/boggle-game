@@ -104,8 +104,6 @@ export default class Board extends Component {
             gameOver={this.gameOver}
           />
 
-          <button className="btn btn-sm btn-primary btn3d" onClick={this.startMultiplayer} >Multiplayer</button>
-
           <Selection
             setSelected={this.setSelected}
             letters={this.state.letters}
@@ -116,6 +114,17 @@ export default class Board extends Component {
             setSelected={this.setSelected}
             pushFound={this.pushFound}
           />
+
+          {this.state.gameStart && (
+            <div className="btn-multiplayer">
+              <button
+                className="btn btn-sm btn-primary btn3d"
+                onClick={() => this.startMultiplayer()}
+              >
+                New Multiplayer Game
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="col-md-6 col-sm-5">

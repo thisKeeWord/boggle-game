@@ -1,10 +1,5 @@
-.board {
-  border: 4px solid #ffca08;
-  background-color: #398bd4;
-  height: 440px;
-  width: 390px;
-  margin: 0 auto;
-  position: relative;
-  margin-top: 20px;
-  text-align: center;
+.btn-multiplayer {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px !important;
 }
