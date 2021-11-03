@@ -17,6 +17,8 @@ export default class Controls extends Component {
         >
           {this.props.gameStart ? "Start" : "Stop/Reveal"}
         </button>
+
+
       </div>
     )
   }
