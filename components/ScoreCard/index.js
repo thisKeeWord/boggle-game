@@ -39,6 +39,8 @@ export default class ScoreCard extends Component {
 
     const progress = Math.floor(this.props.wordsFound.length / this.props.wordsCache.length * 100)
 
+    console.log(this.props.wordsCache)
+
     return (
       <div className="panel score-card animated slideInRight">
         <div className="panel-heading">
@@ -46,7 +48,7 @@ export default class ScoreCard extends Component {
         </div>
         <div className="panel-body">
           <div>
-            <div style={{ marginLeft: `calc(${progress}% - 10px`, transition: 'margin-left 0.6s' }}>{progress}%</div>
+            <div style={{ width: `calc(${progress}%`, transition: 'width 0.6s', textAlign: 'right' }}>{progress}%</div>
           </div>
           <div className="progress">
             <div
