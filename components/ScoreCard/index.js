@@ -39,8 +39,6 @@ export default class ScoreCard extends Component {
 
     const progress = Math.floor(this.props.wordsFound.length / this.props.wordsCache.length * 100)
 
-    console.log(this.props.wordsCache)
-
     return (
       <div className="panel score-card animated slideInRight">
         <div className="panel-heading">
