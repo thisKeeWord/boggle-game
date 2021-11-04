@@ -7,8 +7,6 @@ export default class Controls extends Component {
   render() {
     return (
       <div className="buttons-and-clock">
-        <Clock start={this.props.start} gameOver={this.props.gameOver} gameStart={this.props.gameStart} />
-
         <button
           id="start"
           className="btn btn3d btn-primary btn-sm"
@@ -17,6 +15,8 @@ export default class Controls extends Component {
         >
           {this.props.gameStart ? "Start" : "Stop/Reveal"}
         </button>
+
+        <Clock start={this.props.start} gameOver={this.props.gameOver} gameStart={this.props.gameStart} />
       </div>
     )
   }
