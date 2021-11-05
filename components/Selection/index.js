@@ -111,7 +111,7 @@ export default class Selection extends Component {
     const upperCased = this.props.selected.toUpperCase()
     // question mark
     let wordStatus = (
-      <span className="input-group-addon">&#63;</span>
+      <span className="input-group-addon">...</span>
     )
 
     // min length for word is 3

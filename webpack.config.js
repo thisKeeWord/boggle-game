@@ -13,9 +13,9 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js',
   },
-  // devtool: 'eval-source-map',
-  // mode: 'development',
-  mode: 'production',
+  devtool: 'eval-source-map',
+  mode: 'development',
+  // mode: 'production',
   devServer: {
     // Required for Docker to work with dev server
     // host: "0.0.0.0",
