@@ -5,11 +5,6 @@ import Board from './Board'
 
 import './index.scss'
 
-// add "How To Play" button next to multiplayer button with a link to how to play
-// add footer with how to play link and about
-// align submit button to input
-
-
 const Game = () => (
   <Router>
     <Switch>
