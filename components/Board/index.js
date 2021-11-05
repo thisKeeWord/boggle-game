@@ -95,47 +95,55 @@ export default class Board extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-md-6 col-sm-7">
-          <Controls
-            start={this.state.start}
-            gameStart={this.state.gameStart}
-            startGame={this.startGame}
-            gameOver={this.gameOver}
-          />
+      <>
+        <div className="row">
+          <div className="col-md-6 col-sm-7">
+            <Controls
+              start={this.state.start}
+              gameStart={this.state.gameStart}
+              startGame={this.startGame}
+              gameOver={this.gameOver}
+            />
 
-          <Selection
-            setSelected={this.setSelected}
-            letters={this.state.letters}
-            selected={this.state.selected}
-            wordsCache={this.state.wordsCache}
-            wordsFound={this.state.wordsFound}
-            gameStart={this.state.gameStart}
-            setSelected={this.setSelected}
-            pushFound={this.pushFound}
-          />
+            <Selection
+              setSelected={this.setSelected}
+              letters={this.state.letters}
+              selected={this.state.selected}
+              wordsCache={this.state.wordsCache}
+              wordsFound={this.state.wordsFound}
+              gameStart={this.state.gameStart}
+              setSelected={this.setSelected}
+              pushFound={this.pushFound}
+            />
 
-          {this.state.gameStart && (
-            <div className="btn-multiplayer">
-              <button
-                className="btn btn-sm btn-primary btn3d"
-                onClick={() => this.startMultiplayer()}
-              >
-                New Multiplayer Game
+            {this.state.gameStart && (
+              <div className="btn-multiplayer">
+                <button
+                  className="btn btn-sm btn-primary btn3d"
+                  onClick={() => this.startMultiplayer()}
+                >
+                  New Multiplayer Game
               </button>
-            </div>
-          )}
+              </div>
+            )}
+          </div>
+
+          <div className="col-md-6 col-sm-5">
+            <Score
+              wordsCache={this.state.wordsCache}
+              wordsFound={this.state.wordsFound}
+              gameStart={this.state.gameStart}
+              setSelected={this.setSelected}
+            />
+          </div>
         </div>
 
-        <div className="col-md-6 col-sm-5">
-          <Score
-            wordsCache={this.state.wordsCache}
-            wordsFound={this.state.wordsFound}
-            gameStart={this.state.gameStart}
-            setSelected={this.setSelected}
-          />
-        </div>
-      </div>
+        <footer className="bg-primary">
+          <span>How To Play</span>
+          <span>Contact</span>
+          <span>About Me</span>
+        </footer>
+      </>
     )
   }
 }

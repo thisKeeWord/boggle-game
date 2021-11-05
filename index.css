@@ -3,3 +3,9 @@ html, body {
   width: 100%;
   background-color: lightblue;
 }
+
+#boggle {
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 40px;
+}
