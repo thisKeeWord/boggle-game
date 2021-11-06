@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { totalTime } from '../../constants'
+import { totalTime } from '../../../constants'
 
 import './styles.scss'
 

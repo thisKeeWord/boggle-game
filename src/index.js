@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Board from './Board'
+import Board from './pages/Board'
 
 import './index.scss'
 
