@@ -2,10 +2,10 @@ window.jQuery = window.$ = require('jquery')
 import React, { Component } from 'react'
 import io from 'socket.io-client'
 import Immutable from 'immutable'
-import Controls from '../Controls'
-import Selection from '../Selection'
-import Score from '../Score'
-import { dice } from '../../constants'
+import Controls from '../../components/Controls'
+import Selection from '../../components/Selection'
+import Score from '../../components/Score'
+import { dice } from '../../../constants'
 
 import './styles.scss'
 
