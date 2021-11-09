@@ -39,6 +39,7 @@ span.input-group-addon {
   align-items: center;
   margin-bottom: 15px;
   height: 32px;
+  width: 100%;
 
   & > button {
     padding: 0 !important;
@@ -62,6 +63,14 @@ span.input-group-addon {
 .row.board-row {
   padding-bottom: 0;
   display: inline-flex;
+  width: 100%;
+  justify-content: center;
+  
+
+  @media screen and (max-width: 768px) {
+    height: calc(20% - 10px);
+    margin-bottom: 10px;
+  }
 }
 
 .board {
@@ -75,7 +84,9 @@ span.input-group-addon {
   text-align: center;
     
   @media screen and (max-width: 768px) {
-    max-height: 270px;
-    max-width: 230px;
+    height: calc(100vw);
+    width: 100%;
+    max-width: 390px;
+    max-height: 440px;
   }
 }
