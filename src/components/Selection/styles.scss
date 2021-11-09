@@ -17,6 +17,12 @@ span.input-group-addon {
   width: 32px;
   padding: 6px;
 
+  &.info {
+    color: #fff;
+    background-color: #39b3d7;
+    border-color: #39b3d7;
+  }
+
   &.success {
     color: #fff;
     background-color: limegreen;
@@ -46,6 +52,12 @@ span.input-group-addon {
     border: none !important;
     height: 32px;
     width: 32px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    &.clear {
+      width: 42px;
+    }
   }
   
   & > input {

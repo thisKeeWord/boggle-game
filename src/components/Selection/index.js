@@ -11,7 +11,6 @@ export default class Selection extends Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log('asdfasdfasdfasdfsdfsadf')
     $board.find('.board-letter').removeClass('active')
     this.pressSelection(props.selected)
   }
@@ -31,15 +30,11 @@ export default class Selection extends Component {
   }
 
   pushLetter = (e) => {
-    console.log('hihihi')
     let char = e.target.innerText
     let input = document.getElementById('word-input')
 
     setNativeValue(input, input.value + char)
     input.dispatchEvent(new Event('input', { bubbles: true }))
-
-    console.log(input.value, char, 'input')
-
   }
 
   validateKey = (e) => {
@@ -48,9 +43,16 @@ export default class Selection extends Component {
     }
   }
 
+  clearSelection = (e) => {
+    let input = document.getElementById('word-input')
+
+    setNativeValue(input, '')
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+    this.props.setSelected('')
+  }
+
   // find pathing
   pressSelection = (target) => {
-    console.log('pressss')
     target = target.toUpperCase().replace('QU', 'Q')
     const that = this
     let visited = [
@@ -129,7 +131,7 @@ export default class Selection extends Component {
     const upperCased = this.props.selected.toUpperCase()
     // question mark
     let wordStatus = (
-      <span className="input-group-addon">...</span>
+      <span className="input-group-addon info">...</span>
     )
 
     // min length for word is 3
@@ -174,10 +176,10 @@ export default class Selection extends Component {
               name="word"
               placeholder="Click tiles or type here"
               onChange={this.selectWord}
-              autoFocus
               autoComplete="off"
             />
-            <button type="submit" style={{ marginLeft: '10px' }}>{wordStatus}</button>
+            <button className="btn btn3d btn-info" type="submit" style={{ marginLeft: '10px' }}>{wordStatus}</button>
+            <button className="btn btn3d btn-info clear" onClick={this.clearSelection}>Clear</button>
           </form>
         ) : (
           <div />
