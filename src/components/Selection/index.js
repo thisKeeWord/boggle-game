@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
-import $ from 'jquery'
+const $ = require('jquery')
 
 import './styles.scss'
 
-let board
+let $board
 
 export default class Selection extends Component {
   componentDidMount() {
-    board = $('.board')
+    $board = $('.board')
   }
 
   componentWillReceiveProps(props) {
-    board.find('button').removeClass('active')
+    console.log('asdfasdfasdfasdfsdfsadf')
+    $board.find('.board-letter').removeClass('active')
     this.pressSelection(props.selected)
   }
 
   selectWord = (e) => {
-    e.preventDefault()
     this.props.setSelected(e.target.value)
   }
 
@@ -31,15 +31,26 @@ export default class Selection extends Component {
   }
 
   pushLetter = (e) => {
-    const char = e.target.innerText
+    console.log('hihihi')
+    let char = e.target.innerText
     let input = document.getElementById('word-input')
-    input.value += char
-    let event = new Event('input', { bubbles: true })
-    input.dispatchEvent(event)
+
+    setNativeValue(input, input.value + char)
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+
+    console.log(input.value, char, 'input')
+
+  }
+
+  validateKey = (e) => {
+    if (!e.key.match(/[a-z]/i)) {
+      e.preventDefault()
+    }
   }
 
   // find pathing
   pressSelection = (target) => {
+    console.log('pressss')
     target = target.toUpperCase().replace('QU', 'Q')
     const that = this
     let visited = [
@@ -57,9 +68,9 @@ export default class Selection extends Component {
     }
 
     function search(y, x, word, path, depth) {
-      const button = board.find('[data-row=' + y + '][data-col=' + x + ']')
-      path = path.concat(button[0])
-      let nextChar = button.text()
+      let $button = $board.find('[data-row=' + y + '][data-col=' + x + ']')
+      path = path.concat($button[0])
+      let nextChar = $button.text()
       nextChar = nextChar === 'Qu' ? 'Q' : nextChar
       word += nextChar
       if (depth === target.length - 1) {
@@ -107,6 +118,13 @@ export default class Selection extends Component {
     $(path).addClass('active')
   }
 
+  checkIfEnter = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      this.refs.form.dispatchEvent(new Event("submit"))
+    }
+  }
+
   render() {
     const upperCased = this.props.selected.toUpperCase()
     // question mark
@@ -130,38 +148,34 @@ export default class Selection extends Component {
     }
 
     return (
-      <div>
+      <div className="yo">
         <div className="board">
-          {[...Array(5)].map((e, index) => {
+          {[...Array(25)].map((el, i) => {
             return (
-              <div className="row board-row" key={index}>
-                {[...Array(5)].map((el, i) => {
-                  return (
-                    <button
-                      className="btn btn3d btn-white letter"
-                      key={index * 5 + i}
-                      data-row={Math.floor((index * 5 + i) / 5)}
-                      data-col={(index * 5 + i) % 5}
-                      onClick={this.pushLetter}
-                    >
-                      {this.props.letters[index * 5 + i] === 'Q' ? 'Qu' : this.props.letters[index * 5 + i]}
-                    </button>
-                  )
-                })}
-              </div>
+              <button
+                className="btn btn3d btn-white letter board-letter"
+                key={i}
+                data-row={Math.floor(i / 5)}
+                data-col={i % 5}
+                onClick={this.pushLetter}
+                onKeyPress={this.validateKey}
+              >
+                {this.props.letters[i] === 'Q' ? 'Qu' : this.props.letters[i]}
+              </button>
             )
           })}
         </div>
 
         {!this.props.gameStart ? (
-          <form className="animated slideInLeft word-form" onSubmit={this.boardHasWord}>
+          <form className="animated slideInLeft word-form" ref="form" onSubmit={this.boardHasWord}>
             <input
               id="word-input"
               type="text"
               name="word"
-              placeholder="Type words here"
+              placeholder="Click tiles or type here"
               onChange={this.selectWord}
               autoFocus
+              autoComplete="off"
             />
             <button type="submit" style={{ marginLeft: '10px' }}>{wordStatus}</button>
           </form>
@@ -170,5 +184,18 @@ export default class Selection extends Component {
         )}
       </div>
     )
+  }
+}
+
+
+function setNativeValue(element, value) {
+  const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set
+  const prototype = Object.getPrototypeOf(element)
+  const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set
+
+  if (valueSetter && valueSetter !== prototypeValueSetter) {
+    prototypeValueSetter.call(element, value)
+  } else {
+    valueSetter.call(element, value)
   }
 }
