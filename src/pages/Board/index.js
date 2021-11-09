@@ -138,11 +138,11 @@ export default class Board extends Component {
           </div>
         </div>
 
-        <footer className="bg-primary">
+        {/* <footer className="bg-primary">
           <span>How To Play</span>
           <span>Contact</span>
           <span>About Me</span>
-        </footer>
+        </footer> */}
       </>
     )
   }
