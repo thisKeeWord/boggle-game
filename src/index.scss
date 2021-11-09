@@ -39,9 +39,9 @@ h1 {
       align-items: center;
 
       @media screen and (max-width: 768px) {
-        height: 38px;
-        width: 38px;
-        font-size: 18px;
+        max-height: 38px;
+        max-width: 38px;
+        font-size: 16px;
       }
 
       &:active,

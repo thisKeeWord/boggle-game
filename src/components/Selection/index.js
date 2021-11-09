@@ -132,17 +132,23 @@ export default class Selection extends Component {
     return (
       <div>
         <div className="board">
-          {[...Array(25)].map((el, i) => {
+          {[...Array(5)].map((e, index) => {
             return (
-              <button
-                className="btn btn3d btn-white letter"
-                key={i}
-                data-row={Math.floor(i / 5)}
-                data-col={i % 5}
-                onClick={this.pushLetter}
-              >
-                {this.props.letters[i] === 'Q' ? 'Qu' : this.props.letters[i]}
-              </button>
+              <div className="row board-row" key={index}>
+                {[...Array(5)].map((el, i) => {
+                  return (
+                    <button
+                      className="btn btn3d btn-white letter"
+                      key={index * 5 + i}
+                      data-row={Math.floor((index * 5 + i) / 5)}
+                      data-col={(index * 5 + i) % 5}
+                      onClick={this.pushLetter}
+                    >
+                      {this.props.letters[index * 5 + i] === 'Q' ? 'Qu' : this.props.letters[index * 5 + i]}
+                    </button>
+                  )
+                })}
+              </div>
             )
           })}
         </div>
