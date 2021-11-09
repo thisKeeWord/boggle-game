@@ -176,6 +176,7 @@ export default class Selection extends Component {
               name="word"
               placeholder="Click tiles or type here"
               onChange={this.selectWord}
+              autoFocus
               autoComplete="off"
             />
             <button className="btn btn3d btn-info" type="submit" style={{ marginLeft: '10px' }}>{wordStatus}</button>
