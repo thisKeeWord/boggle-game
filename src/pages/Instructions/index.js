@@ -18,7 +18,7 @@ export default class Instructions extends Component {
         </p>
 
           <p className="about-buttons">
-            The buttons should generally self-explanatory. However the button next to the input field has 3 different states:
+            The button next to the input field has 3 different states:
           <img src="../../../images/pending.png" /> (pending),
           <img src="../../../images/valid.png" /> (valid),
           and
