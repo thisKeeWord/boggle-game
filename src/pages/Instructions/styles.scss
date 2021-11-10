@@ -1,0 +1,20 @@
+.instructions-container {
+  padding-top: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  line-height: 1.75;
+  
+  .instructions {
+    .about-buttons {
+      margin-top: 30px;
+      margin-bottom: 30px;
+
+      img {
+        height: 35px;
+        width: 35px;
+      }
+    }
+  }
+}

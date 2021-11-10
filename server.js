@@ -1,7 +1,9 @@
 const express = require('express')
+const fallback = require('express-history-api-fallback')
 const app = express()
 const http = require('http')
 const compression = require('compression')
+
 
 const server = http.Server(app)
 const io = require('socket.io')(server)
@@ -31,6 +33,7 @@ io.on('connection', socket => {
 
 app.use(compression())
 app.use(express.static(__dirname))
+app.use(fallback('index.html', { root: __dirname }))
 
 const port = process.env.PORT || 3000
 server.listen(port, console.log.bind(console, 'listening at http://localhost:' + port))

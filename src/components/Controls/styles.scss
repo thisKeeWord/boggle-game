@@ -1,25 +1,24 @@
 .buttons-and-clock {
-  width: 390px;
+  max-width: 390px;
   position: relative;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+
 
   .initial-buttons {
     display: flex;
 
     a.instructions {
-      width: 35px;
+      width: 40px;
+      margin-left: 20px;
     }
   }
 
   .btn3d {
     margin-top: 20px;
     width: 100px;
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 250px;
   }
 }
