@@ -7,6 +7,12 @@
   line-height: 1.85;
   
   .instructions {
+    .about-boggle {
+      a {
+        cursor: pointer;
+      }
+    }
+
     .about-buttons {
       margin-top: 15px;
       margin-bottom: 15px;

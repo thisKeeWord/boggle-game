@@ -10,9 +10,9 @@ export default class Instructions extends Component {
       <div className="instructions-container">
         <div className="col-md-6 col-sm-8 instructions">
           <p className="about-boggle">
-            <strong>Boggle5</strong> is based off of the classic <Link to="https://en.wikipedia.org/wiki/Boggle" target="_blank" rel="noopener noreferrer">Boggle game</Link>.
+            <strong>Boggle5</strong> is based off of the classic <a href="https://en.wikipedia.org/wiki/Boggle" target="_blank" rel="noopener noreferrer">Boggle game</a>.
           The goal is to find as many words as you can until the timer runs out.
-          These words that only can be made from letters adjacent tiles - top, right, bottom, left, and diagonal.
+          These words can only be made from letters of adjacent tiles - top, right, bottom, left, and diagonal.
           The same letter tile cannot be used more than once in a given word.
           Words must be at least three letters long and cannot be reused.
         </p>
