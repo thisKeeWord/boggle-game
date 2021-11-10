@@ -116,7 +116,7 @@ export default class Board extends Component {
               pushFound={this.pushFound}
             />
 
-            {this.state.gameStart && (
+            {(!queryBoard || (this.state.gameStart && !!this.state.start)) && (
               <div className="btn-multiplayer">
                 <button
                   className="btn btn-sm btn-primary btn3d"
@@ -124,6 +124,13 @@ export default class Board extends Component {
                 >
                   New Multiplayer Game
               </button>
+              </div>
+            )}
+
+            {queryBoard && this.state.gameStart && !this.state.start && (
+              <div className="multiplayer-description">
+                <p className="first">Copy your URL and have the other player(s) visit it.</p>
+                <p>Press "Start" when everyone is ready.</p>
               </div>
             )}
           </div>
