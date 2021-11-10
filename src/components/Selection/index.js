@@ -150,7 +150,7 @@ export default class Selection extends Component {
     }
 
     return (
-      <div className="yo">
+      <div>
         <div className="board">
           {[...Array(25)].map((el, i) => {
             return (

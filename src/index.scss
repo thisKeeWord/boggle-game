@@ -178,3 +178,27 @@ h1 {
     animation-duration: 2s;
   }
 }
+
+
+footer {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+
+  a {
+    margin: 0 7px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      color: white;
+    }
+  }
+}

@@ -18,13 +18,15 @@ export default class Controls extends Component {
             {this.props.gameStart ? "Start" : "Stop/Reveal"}
           </button>
 
-          {/* <Link
-            to="/how-to-play"
-            className="btn btn-sm btn-primary btn3d instructions"
-            title="How to Play"
-          >
-            ?
-          </Link> */}
+          {this.props.gameStart && (
+            <Link
+              to="/how-to-play"
+              className="btn btn-sm btn-primary btn3d instructions"
+              title="How to Play"
+            >
+              ?
+            </Link>
+          )}
         </div>
 
         <Clock start={this.props.start} gameOver={this.props.gameOver} gameStart={this.props.gameStart} />
