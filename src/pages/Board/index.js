@@ -21,7 +21,7 @@ export default class Board extends Component {
       wordsCache: Immutable.Set(),
       wordsFound: Immutable.Set(),
       start: null,
-      gameStart: true,
+      gameEnd: true,
     }
   }
 
@@ -83,13 +83,13 @@ export default class Board extends Component {
     this.setState({
       start: Date.now(),
       wordsFound: Immutable.Set(),
-      gameStart: false
+      gameEnd: false
     })
   }
 
   gameOver = (gameStatus) => {
     this.setState({
-      gameStart: gameStatus
+      gameEnd: gameStatus
     })
   }
 
@@ -100,7 +100,7 @@ export default class Board extends Component {
           <div className="col-md-6 col-sm-7">
             <Controls
               start={this.state.start}
-              gameStart={this.state.gameStart}
+              gameEnd={this.state.gameEnd}
               startGame={this.startGame}
               gameOver={this.gameOver}
             />
@@ -111,12 +111,12 @@ export default class Board extends Component {
               selected={this.state.selected}
               wordsCache={this.state.wordsCache}
               wordsFound={this.state.wordsFound}
-              gameStart={this.state.gameStart}
+              gameEnd={this.state.gameEnd}
               setSelected={this.setSelected}
               pushFound={this.pushFound}
             />
 
-            {(!queryBoard || (this.state.gameStart && !!this.state.start)) && (
+            {(!queryBoard || (this.state.gameEnd && !!this.state.start)) && (
               <div className="btn-multiplayer">
                 <button
                   className="btn btn-sm btn-primary btn3d"
@@ -127,10 +127,10 @@ export default class Board extends Component {
               </div>
             )}
 
-            {queryBoard && this.state.gameStart && !this.state.start && (
+            {queryBoard && this.state.gameEnd && !this.state.start && (
               <div className="multiplayer-description">
                 <p className="first">Copy your URL and have the other player(s) visit it.</p>
-                <p>Press "Start" when everyone is ready.</p>
+                <p>Press "Begin" when everyone is ready.</p>
               </div>
             )}
           </div>
@@ -139,7 +139,7 @@ export default class Board extends Component {
             <Score
               wordsCache={this.state.wordsCache}
               wordsFound={this.state.wordsFound}
-              gameStart={this.state.gameStart}
+              gameEnd={this.state.gameEnd}
               setSelected={this.setSelected}
             />
           </div>

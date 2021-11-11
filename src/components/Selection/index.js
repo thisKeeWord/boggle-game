@@ -168,7 +168,7 @@ export default class Selection extends Component {
           })}
         </div>
 
-        {!this.props.gameStart ? (
+        {!this.props.gameEnd ? (
           <form className="animated slideInLeft word-form" ref="form" onSubmit={this.boardHasWord}>
             <input
               id="word-input"
@@ -179,7 +179,7 @@ export default class Selection extends Component {
               autoFocus
               autoComplete="off"
             />
-            <button className="btn btn3d btn-info" type="submit" style={{ marginLeft: '10px' }}>{wordStatus}</button>
+            <button className="btn btn3d btn-info submit" type="submit">{wordStatus}</button>
             <button className="btn btn3d btn-info clear" onClick={this.clearSelection}>Clear</button>
           </form>
         ) : (

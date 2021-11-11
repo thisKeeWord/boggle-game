@@ -11,6 +11,10 @@
   .initial-buttons {
     display: flex;
 
+    button.start {
+      background-color: brown;
+    }
+
     a.instructions {
       width: 40px;
       margin-left: 20px;

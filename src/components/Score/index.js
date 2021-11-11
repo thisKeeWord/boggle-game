@@ -12,7 +12,7 @@ const _ = {
 
 export default class Score extends Component {
   shouldComponentUpdate(props) {
-    return this.props.wordsCache.size !== props.wordsCache.size || !is(this.props.wordsFound, props.found) || this.props.gameStart !== props.gameStart
+    return this.props.wordsCache.size !== props.wordsCache.size || !is(this.props.wordsFound, props.found) || this.props.gameEnd !== props.gameEnd
   }
 
   render() {
@@ -32,7 +32,7 @@ export default class Score extends Component {
           key={key}
           wordsFound={foundGroups[key] || []}
           wordsCache={wordGroups[key]}
-          gameStart={this.props.gameStart}
+          gameEnd={this.props.gameEnd}
           setSelected={this.props.setSelected}
         />
       )

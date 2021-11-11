@@ -11,14 +11,13 @@ export default class Controls extends Component {
         <div className="initial-buttons">
           <button
             id="start"
-            className="btn btn3d btn-primary btn-sm"
-            style={{ backgroundColor: "brown" }}
-            onClick={() => this.props.gameStart ? this.props.startGame(true) : this.props.gameOver(true)}
+            className="btn btn3d btn-primary btn-sm start"
+            onClick={() => this.props.gameEnd ? this.props.startGame(true) : this.props.gameOver(true)}
           >
-            {this.props.gameStart ? "Start" : "Stop/Reveal"}
+            {this.props.gameEnd ? "Begin" : "End"}
           </button>
 
-          {this.props.gameStart && (
+          {this.props.gameEnd && (
             <Link
               to="/how-to-play"
               className="btn btn-sm btn-primary btn3d instructions"
@@ -29,7 +28,7 @@ export default class Controls extends Component {
           )}
         </div>
 
-        <Clock start={this.props.start} gameOver={this.props.gameOver} gameStart={this.props.gameStart} />
+        <Clock start={this.props.start} gameOver={this.props.gameOver} gameEnd={this.props.gameEnd} />
       </div>
     )
   }
