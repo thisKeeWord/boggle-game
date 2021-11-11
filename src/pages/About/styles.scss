@@ -1,0 +1,39 @@
+.about-container {
+  padding-top: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  line-height: 1.85;
+  
+  a {
+    cursor: pointer;
+  }
+
+  .contact {
+    margin-bottom: 15px;
+  }
+
+  .more {
+    margin-bottom: 2px;
+  }
+
+  .icons {
+    width: 100%;
+
+    a {
+      padding-right: 10px;
+
+      .icon-link {
+        height: 25px;
+        width: 25px;
+        color: black;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1em;
+    padding-top: 120px;
+  }
+}
