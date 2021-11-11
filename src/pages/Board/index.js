@@ -130,7 +130,7 @@ export default class Board extends Component {
             {queryBoard && this.state.gameEnd && !this.state.start && (
               <div className="multiplayer-description">
                 <p className="first">Copy your URL and have the other player(s) visit it.</p>
-                <p>Press "Start" when everyone is ready.</p>
+                <p>Press "Begin" when everyone is ready.</p>
               </div>
             )}
           </div>

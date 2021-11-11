@@ -14,7 +14,7 @@ export default class Controls extends Component {
             className="btn btn3d btn-primary btn-sm start"
             onClick={() => this.props.gameEnd ? this.props.startGame(true) : this.props.gameOver(true)}
           >
-            {this.props.gameEnd ? "Start" : "Stop/Reveal"}
+            {this.props.gameEnd ? "Begin" : "End"}
           </button>
 
           {this.props.gameEnd && (
