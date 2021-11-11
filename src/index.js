@@ -6,6 +6,7 @@ import Instructions from './pages/Instructions'
 
 import './index.scss'
 import About from './pages/About'
+import FourOhFour from './pages/FourOhFour'
 
 const Game = () => (
   <div>
@@ -15,6 +16,7 @@ const Game = () => (
         <Route path="/?board=:board" exact component={Board} />
         <Route path="/how-to-play" component={Instructions} />
         <Route path="/about" component={About} />
+        <Route path="/*" component={FourOhFour} />
       </Switch>
     </Router>
 
