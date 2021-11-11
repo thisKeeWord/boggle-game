@@ -19,7 +19,7 @@ export default class Clock extends Component {
       return
     }
 
-    if (this.props.gameStart) {
+    if (this.props.gameEnd) {
       this.setState({
         timeLeft: totalTime
       })

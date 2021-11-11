@@ -55,6 +55,10 @@ span.input-group-addon {
     margin-left: 10px;
     margin-right: 10px;
 
+    &.submit {
+      margin-left: 12px;
+    }
+
     &.clear {
       width: 42px;
     }

@@ -20,7 +20,7 @@ export default class ScoreCard extends Component {
         , ' ')
     })
 
-    if (this.props.gameStart) {
+    if (this.props.gameEnd) {
       this.props.wordsCache.map((word, i) => {
         if (!this.props.wordsFound.includes(word)) {
           wordLabels.push(
