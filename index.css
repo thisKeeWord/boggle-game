@@ -2,10 +2,13 @@ html, body {
   height: 100%;
   width: 100%;
   background-color: lightblue;
+  overflow-x: hidden;
 }
 
 #boggle {
   position: relative;
   min-height: 100%;
   padding-bottom: 40px;
+  overflow: hidden;
+  width: 100%;
 }
