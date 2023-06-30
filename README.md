@@ -1,10 +1,6 @@
 Boggle5
 ==============
 
-Play
--------
-
-You can play the game at https://boggle5.herokuapp.com.
 
 Description
 ----------

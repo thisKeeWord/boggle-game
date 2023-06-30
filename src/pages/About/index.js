@@ -24,7 +24,7 @@ export default class About extends Component {
           </p>
 
           <p className="more">
-            For more of my projects, please visit my <a href="https://leonardk.herokuapp.com" target="_blank" rel="noopener noreferrer">portfolio</a>.
+            For more of my projects, please visit my <a href="https://leonardk1.web.app" target="_blank" rel="noopener noreferrer">portfolio</a>.
           </p>
 
           <div className="icons" data-testid="social-icons">
@@ -37,7 +37,7 @@ export default class About extends Component {
             <a href="https://www.instagram.com/theonlyleonardk" target="_blank" rel="noreferrer" data-testid="media-icon">
               <i className="fa fa-instagram fa-lg gh grow icon-link" />
             </a>
-            <a href="https://leonardk.herokuapp.com" target="_blank" rel="noreferrer" data-testid="media-icon">
+            <a href="https://leonardk1.web.app" target="_blank" rel="noreferrer" data-testid="media-icon">
               <i className="fa fa-laptop fa-lg gh grow icon-link" />
             </a>
           </div>
